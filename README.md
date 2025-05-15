@@ -1,93 +1,97 @@
-# 👋 Hi, I'm Vishwanath (ms-vishwanath)
+<h1 align="center">Hey there! I'm Vishwanath 🚀</h1>
 
-Welcome to my GitHub profile! I'm a passionate full-stack developer specialized in building fast, scalable, and beautiful web applications. I love crafting clean, efficient code and creating meaningful projects that solve real-world problems.
+<p align="center">
+  Full Stack Developer | TypeScript Lover | Problem Solver | Tech Explorer  
+</p>
 
----
-
-## 🔗 Connect with Me
-
-[![GitHub](https://img.shields.io/badge/GitHub-ms--vishwanath-181717?style=for-the-badge&logo=github)](https://github.com/ms-vishwanath)  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-msvishwanath-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/msvishwanath/)  
-[![Email](https://img.shields.io/badge/Email-msvishwanath@outlook.com-D14836?style=for-the-badge&logo=gmail)](mailto:msvishwanath@outlook.com)  
-[![Phone](https://img.shields.io/badge/Phone-+91%209790006831-25D366?style=for-the-badge&logo=whatsapp)](tel:+919790006831)  
-
----
-
-## 💻 Portfolio
-
-Check out my live portfolio and projects at:  
-🌐 [https://ms-vishwanath.web.app/](https://ms-vishwanath.web.app/)
+<p align="center">
+  <a href="https://ms-vishwanath.web.app/">🌐 Portfolio</a> • 
+  <a href="https://github.com/ms-vishwanath">GitHub</a> • 
+  <a href="mailto:msvishwanath@outlook.com">Email</a> • 
+  <a href="https://linkedin.com/in/msvishwanath">LinkedIn</a>
+</p>
 
 ---
 
-## 🚀 My Projects
+## 💼 About Me
 
-### Web Applications
-
-| Project Name    | Description                                                                | Link                                               |
-| --------------- | -------------------------------------------------------------------------- | -------------------------------------------------- |
-| **Shorto**      | A fast, free tool to shorten your URLs with ease and style.               | [shorto-one.vercel.app](https://shorto-one.vercel.app/)             |
-| **Functionary** | A centralized hub to store, discover, and share useful code functions.    | [functionary.vercel.app](https://functionary.vercel.app/)           |
-| **Problem Painter** | A canvas where your thoughts take shape and problems find their answers.| [problem-painter.vercel.app](https://problem-painter.vercel.app/)   |
-| **Tic Tac Tribe** | Real-time multiplayer Tic Tac Toe game with simple room codes.            | [tic-tac-tribe.web.app](https://tic-tac-tribe.web.app/)             |
-| **Quote of the Day** | Generates a random daily quote for each user.                           | [quote-of-the-day-three.vercel.app](https://quote-of-the-day-three.vercel.app/) |
-| **Pixto**       | Convert PNG, JPEG, JPG, and SVG images quickly to your preferred format.  | [pixto.vercel.app](https://pixto.vercel.app/)                       |
-| **Check My Sound** | Tool to test left, right, and surround audio channels on headphones.     | [checkmysound.web.app](https://checkmysound.web.app/)               |
+I'm a full-stack developer who builds scalable, high-performance apps using **Next.js, Node.js, PostgreSQL**, and **TypeScript**. I engineer digital experiences that work — fast, accessible, and maintainable. Whether it's a SaaS dashboard, a realtime multiplayer game, or a microservice API, I'm all about shipping clean code that delivers.
 
 ---
 
-## 🛠 Tech Stacks & Tools
+## ⚒️ Tech Toolbox
 
-### Web Frameworks and Libraries  
-React.js, Next.js, Bootstrap, Tailwind CSS, Daisy UI, Shadcn UI, Material UI, Ant Design, Three.js, Recharts, Redux Toolkit, Zod, React Hook Form, Framer Motion
+**Languages**  
+TypeScript, JavaScript, Python, C, Embedded C
 
-### Mobile Frameworks  
+**Frontend**  
+Next.js, React.js, Tailwind CSS, Shadcn, Framer Motion, Daisy UI, Material UI, Ant Design, Redux Toolkit, Three.js, Recharts
+
+**Mobile**  
 React Native, Expo
 
-### Backend Frameworks and Environments  
+**Backend**  
 Node.js, Express.js, Next.js Server Actions, FastAPI, Turbo
 
-### Version Control & Collaboration  
-Git, GitHub
+**Databases**  
+PostgreSQL, MongoDB, Redis, Supabase, Firebase (RTDB + Firestore), Neon, MariaDB
 
-### Authentication  
-Clerk, Firebase Auth, JWT
+**DevOps & Cloud**  
+Vercel, Firebase Hosting, AWS S3, Render, Heroku, AWS EC2
 
-### Databases  
-PostgreSQL, MongoDB, Firebase Firestore & RTDB, Neon, Supabase, MariaDB, Instant DB, Redis
+**Auth**  
+Clerk, JWT, Firebase Auth
 
-### Storage Services  
-Appwrite Buckets, AWS S3, Firebase Storage
-
-### Deployment Services  
-Vercel, Render, Firebase Hosting, Heroku, AWS EC2 Instances
-
-### Payment Gateways  
+**Payments**  
 Razorpay, PhonePe
 
-### AI Integrations  
-Google AI Studio, Gemini API
-
-### Realtime Integrations  
-Socket.io, Firebase
-
-### Programming Languages  
-Python, JavaScript, C, Embedded C, TypeScript
+**Realtime & API**  
+Socket.io, Firebase Realtime, Gemini API, Google AI Studio
 
 ---
 
-## 📫 How to Reach Me
+## 🚀 Featured Projects
 
-- Email: msvishwanath@outlook.com  
-- Phone: +91 97900 06831  
-- LinkedIn: [linkedin.com/in/msvishwanath](https://www.linkedin.com/in/msvishwanath/)  
-- GitHub: [github.com/ms-vishwanath](https://github.com/ms-vishwanath)
+| Name | Description | Link |
+|------|-------------|------|
+| 🧩 **Shorto** | Elegant URL shortener built with Next.js + Neon DB | [shorto-one.vercel.app](https://shorto-one.vercel.app) |
+| 🧠 **Functionary** | Share & search dev functions — like Stack Overflow snippets | [functionary.vercel.app](https://functionary.vercel.app) |
+| 🎨 **Problem Painter** | Visualize and solve problems through a canvas | [problem-painter.vercel.app](https://problem-painter.vercel.app) |
+| 🎮 **Tic Tac Tribe** | Multiplayer Tic Tac Toe with room system | [tic-tac-tribe.web.app](https://tic-tac-tribe.web.app) |
+| ✨ **Quote of the Day** | Get a unique quote every new day | [quote-of-the-day-three.vercel.app](https://quote-of-the-day-three.vercel.app) |
+| 🖼 **Pixto** | Convert and optimize images on the fly | [pixto.vercel.app](https://pixto.vercel.app) |
+| 🎧 **Check My Sound** | Sound channel testing for headphones | [checkmysound.web.app](https://checkmysound.web.app) |
 
 ---
 
-✨ **Let’s build something amazing together!**
+## 📚 Competitive Programming Profiles
+
+| Platform | Link |
+|----------|------|
+| 🧠 **HackerRank** | [Visit My Profile](https://www.hackerrank.com/profile/vishandcode) |
+| 💡 **LeetCode** | [Visit My Profile](https://leetcode.com/u/msvishwanath) |
+| ⚔️ **CodeChef** | [Visit My Profile](https://www.codechef.com/users/msvishwanath) |
 
 ---
 
-*Last updated: 2025-05-15*
+## 📈 GitHub Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=ms-vishwanath&show_icons=true&theme=tokyonight" width="48%" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ms-vishwanath&layout=compact&theme=tokyonight" width="48%" />
+</p>
+
+---
+
+## 🤝 Let's Connect
+
+- 🔗 **Portfolio:** [ms-vishwanath.web.app](https://ms-vishwanath.web.app)  
+- 📧 **Email:** [msvishwanath@outlook.com](mailto:msvishwanath@outlook.com)  
+- 💬 **Phone:** +91 97900 06831  
+- 💼 **LinkedIn:** [linkedin.com/in/msvishwanath](https://linkedin.com/in/msvishwanath)  
+- 💻 **GitHub:** [github.com/ms-vishwanath](https://github.com/ms-vishwanath)  
+
+---
+
+> _“Code it like it matters. Because it does.”_
 
