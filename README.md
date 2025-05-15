@@ -2,6 +2,15 @@
 
 Welcome to my GitHub! I'm a full-stack developer passionate about building fast, scalable, and meaningful digital products. From building efficient backend systems to crafting smooth, responsive user interfaces, I thrive on solving real-world problems through clean code.
 
+--- 
+
+## 🌐 Portfolio
+
+See my full portfolio and live projects here:  
+[**ms-vishwanath.web.app**](https://ms-vishwanath.web.app)
+
+---
+
 ---
 
 ## 💻 Tech Stack & Tools
@@ -62,12 +71,7 @@ Vercel, Firebase Hosting, Render, AWS EC2, Heroku
 
 ---
 
-## 🌐 Portfolio
 
-See my full portfolio and live projects here:  
-[**ms-vishwanath.web.app**](https://ms-vishwanath.web.app)
-
----
 
 ## 🔗 Connect with Me
 
