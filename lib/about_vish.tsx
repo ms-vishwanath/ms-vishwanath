@@ -90,7 +90,7 @@ const my_works = [
         name: "Get The Trend",
         description:
           "A telegram bot which scraps top 5 recent posts on instagram using hashtag",
-        link: "https://t.me/Get_The_Trend_Bot",
+        link: "https://github.com/ms-vishwanath/get-the-trend",
       },
       {
         name: "AAim 360",
@@ -123,7 +123,12 @@ const my_works = [
           "Manage, monitor, and analyze your IoT devices in one powerful platform. Get started with Cloud Hub today.",
         link: "https://cloud-hub-alpha.web.app/",
       },
-
+      {
+        name: "Timely",
+        description:
+          "A simple, sleek, and accurate stopwatch for all your timing needs—perfect for workouts, productivity, and more.",
+        link: "https://timely-lovat.vercel.app/",
+      },
       {
         name: "Track Your IP",
         description:
@@ -167,7 +172,7 @@ const my_works = [
           "A personalized web application for individuals for managing their home at smart remotes with digital twin and automation !",
         link: "https://cloud360.web.app/",
       },
-      
+
       {
         name: "FarmHub360",
         description:
@@ -181,10 +186,22 @@ const my_works = [
         link: "https://aaim360.web.app/tools/CODESAVER/index.html",
       },
       {
+        name: "Clerk Auth-Appwrite Webhook Integration",
+        description:
+          "This project implements a webhook endpoint to handle Clerk authentication events and sync user data with Appwrite using a serverless route in Next.js.",
+        link: "https://github.com/ms-vishwanath/appwrite-clerk-auth-integration-next-js",
+      },
+      {
         name: "Yemen Mission",
         description:
           "A non-profit website built to support education, relief, and development efforts across Yemen.",
         link: "https://www.yemenmission.org/",
+      },
+      {
+        name: "AWS Node JS S3 Service",
+        description:
+          "A simple production-ready Node.js microservice to upload, replace, and delete files on AWS S3 using TypeScript, Express.js, and AWS SDK v3.",
+        link: "https://github.com/ms-vishwanath/aws-file-service",
       },
       {
         name: "Text to Speech 360",
@@ -289,6 +306,18 @@ const my_works = [
         description:
           "A legacy streamlined web platform empowering agents to manage policies, clients, and claims efficiently.",
         link: "https://insurance-agent-portal.vercel.app/",
+      },
+      {
+        name: "NextJS SMTP",
+        description:
+          "Next JS Powered Mail service useful for integrating email smtp into next js apps",
+        link: "https://github.com/ms-vishwanath/nextjs-smtp",
+      },
+
+      {
+        name: "Diwali Greeting App",
+        description: "A fun and personalized Diwali greeting app",
+        link: "https://github.com/ms-vishwanath/nextjs-smtp",
       },
     ],
   },

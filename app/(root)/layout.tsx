@@ -1,21 +1,26 @@
-import Loader from '@/components/models/Loader'
-import FooterSection from '@/components/sections/footer-section'
-import { BackgroundGradientAnimation } from '@/components/special/background-gradient-animation'
-import { Pointer } from '@/components/special/custom-cursor'
-import { ScrollProgress } from '@/components/special/scroll-progress'
-import { SmoothCursor } from '@/components/special/smooth-cursor'
-import { AOSProvider } from '@/providers/AOSProvider'
-import React from 'react'
+"use client";
 
-export default function Layout({ children }: { children: any }) {
-    return (
-        <div >
-            <Loader>
-                <AOSProvider>
-                    {children}
-                </AOSProvider>
-            </Loader>
-            <ScrollProgress />
-        </div>
-    )
+import React, { useEffect } from "react";
+import Loader from "@/components/models/Loader";
+import { ScrollProgress } from "@/components/special/scroll-progress";
+import { AOSProvider } from "@/providers/AOSProvider";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "@/config/firebase";
+export default function Layout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    if (analytics) {
+      logEvent(analytics, "page_view", {
+        page_path: window.location.pathname,
+      });
+    }
+  }, []);
+  return (
+    <div>
+      <Loader>
+        <AOSProvider>{children}</AOSProvider>
+      </Loader>
+      <ScrollProgress />
+
+    </div>
+  );
 }
