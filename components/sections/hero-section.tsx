@@ -44,9 +44,9 @@ export default function HeroSection() {
               <Link href={socialLinks.github.link} target='_noblank'>
                 <SiGithub size={40} className='transform hover:scale-125 transition-all' />
               </Link>
-              <Link href={socialLinks.linkedin.link} target='_noblank'>
+              {/* <Link href={socialLinks.linkedin.link} target='_noblank'>
                 <AiFillLinkedin size={40} className='text-[#0077B5] transform hover:scale-125 transition-all' />
-              </Link>
+              </Link> */}
               <Link href={socialLinks.email.link} target='_noblank'>
                 <MdEmail size={40} className='text-blue-950 transform hover:scale-125 transition-all' />
               </Link>

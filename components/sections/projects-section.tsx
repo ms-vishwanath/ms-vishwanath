@@ -27,7 +27,7 @@ export default function ProjectsSection() {
                             Ideas turned into digital experiences — crafted with creativity, code, and a lot of coffee.
                         </p>
                     </div>
-                    <div className='flex flex-col gap-4'>
+                    <div className='flex flex-col gap-8'>
                         {
                             my_works?.map((work: any, index: number) => (
                                 <div key={index}>
@@ -38,7 +38,7 @@ export default function ProjectsSection() {
                                             const string = number?.toString()
                                             return <div key={index} data-aos="zoom-in">
                                                 <Link href={item.link} target="_blank" rel="noopener noreferrer">
-                                                    <div className="p-4 hover:bg-violet-100 hover:scale-110 transform transition-all rounded-md min-h-40" >
+                                                    <div className="p-4 hover:bg-violet-100 hover:scale-110 transform transition-all rounded-md min-h-50" >
                                                         <h1 className="text-5xl font-bold">
                                                             {string}
                                                         </h1>

@@ -33,6 +33,10 @@ const socialLinks = {
 const my_works = [
   {
     title: "",
+    projects: [],
+  },
+  {
+    title: "",
     projects: [
       {
         name: "Shorto",
@@ -275,7 +279,7 @@ const my_works = [
         name: "Ambigai Motors Car Care",
         description:
           "A professional service website for a car care and detailing center, showcasing services, bookings, and brand presence.",
-        link: "https://ambigai-motors-car-care.vercel.app/",
+        link: "https://github.com/vishandcode/ambigai-motors-car-care",
       },
       {
         name: "SSBAT Invoice Generator",
@@ -308,20 +312,650 @@ const my_works = [
         link: "https://insurance-agent-portal.vercel.app/",
       },
       {
-        name: "NextJS SMTP",
+        name: "NextJS SMTP Mail Service",
         description:
           "Next JS Powered Mail service useful for integrating email smtp into next js apps",
         link: "https://github.com/ms-vishwanath/nextjs-smtp",
       },
-
       {
         name: "Diwali Greeting App",
         description: "A fun and personalized Diwali greeting app",
-        link: "https://github.com/ms-vishwanath/nextjs-smtp",
+        link: "https://github.com/ms-vishwanath/dynamic-diwali-wishes",
+      },
+      {
+        name: "NextJS Phonepe",
+        description:
+          "PhonePe payment gateway integration with Next.js application",
+        link: "https://github.com/ms-vishwanath/nextjs-phonepe",
+      },
+      {
+        name: "Express Production Starter Template",
+        description:
+          "Express Typeorm, Mongodb, Postgres Dual DB Production level starter template for saving time.",
+        link: "https://github.com/ms-vishwanath/express-production-starter-template",
+      },
+      {
+        name: "Kongunadu Kalaiculoo",
+        description:
+          "Beautiful Portfolio of Kongunadu Kalaiculoo – South Indian Traditional Dance Ensemble",
+        link: "https://github.com/ms-vishwanath/nextjs-clerkauth-instantdb",
+      },
+      {
+        name: "Express Postgres Typeorm Auth Service",
+        description:
+          "Express Typeorm Auth Service with role and access management.",
+        link: "https://github.com/ms-vishwanath/express-postgres-auth-service",
+      },
+      {
+        name: "Express Server with Prometheus Metrics",
+        description:
+          "A production-ready Express.js server setup with Prometheus metrics integration using express-prom-bundle.",
+        link: "https://github.com/ms-vishwanath/express-prom-client",
+      },
+      {
+        name: "Raise Angel Investor Network",
+        description:
+          "Blazing Portfolio of the Raise Angel Investor Startup Network",
+        link: "https://raiseain.web.app/",
+      },
+      {
+        name: "Human Following Robot",
+        description:
+          "A robotics project using sensors and Embedded C to track and follow human movement with autonomous logic.",
+        link: "https://github.com/ms-vishwanath/human-following-robot",
+      },
+      {
+        name: "Single Hand Robot Arm Controller",
+        description:
+          "An assistive controller for robotic arms using Embedded C to interpret inputs from a single-hand joystick or switches.",
+        link: "https://github.com/ms-vishwanath/single-hand-robot-arm-controller",
+      },
+      {
+        name: "Ultrasonic Sensor Tester",
+        description:
+          "A testing module using Embedded C to visualize and validate distance readings from ultrasonic sensors.",
+        link: "https://github.com/ms-vishwanath/ultrasonic-sensor-tester",
+      },
+      {
+        name: "Weather Station",
+        description:
+          "An Embedded C-powered hardware weather station that reads temperature, humidity, and other data via sensors.",
+        link: "https://github.com/ms-vishwanath/weather-station",
+      },
+      {
+        name: "NextJS Clerk Auth Instant DB",
+        description:
+          "A Next.js-powered To-Do app with Clerk authentication and instant database integration.",
+        link: "https://github.com/ms-vishwanath/nextjs-clerkauth-instantdb",
+      },
+      {
+        name: "SIN Generator",
+        description:
+          " A utility tool that generates unique screen identification numbers (SIDs) for tracking UI screens across enterprise software systems.",
+        link: "https://github.com/ms-vishwanath/sin-generator",
+      },
+      {
+        name: "Next JS SSR Template",
+        description:
+          "Next JS Tempate for Static Site Rendering/Generation with forms, custom components and validation ready for file manager hosting ! ",
+        link: " https://github.com/ms-vishwanath/nextjs-ssr-template",
+      },
+      {
+        name: "Automated Contact Form Validator",
+        description:
+          "Express TS Vercel Cron Based Automated Web Functionality Checker for Wordpress, CMS etc.,",
+        link: "https://github.com/ms-vishwanath/automated-contact-form-validator",
+      },
+      {
+        name: "BLOX – Secure Product Tracking",
+        description:
+          "A Next.js-powered web app that verifies tamper-proof QR codes and shows product journey through the blockchain-based distributor ledger network. ",
+        link: "https://github.com/ms-vishwanath/blox-web",
+      },
+      {
+        name: "Gyro Tester Kit",
+        description:
+          "A hardware test kit built with Embedded C to validate and debug gyroscopic sensors used in motion applications.",
+        link: "https://github.com/ms-vishwanath/gyro-tester-kit",
+      },
+
+      {
+        name: "WebRanger Mini",
+        description:
+          "A miniaturized web-enabled monitoring device using Embedded C to collect and push sensor data online.",
+        link: "https://github.com/ms-vishwanath/webranger-mini",
+      },
+      {
+        name: "WebRanger Pro",
+        description:
+          "An advanced version of the WebRanger device built with Embedded C, offering better sensor handling and network features.",
+        link: "https://github.com/ms-vishwanath/webranger-pro",
+      },
+      {
+        name: "BLOX Express – QR Ledger Engine",
+        description:
+          "Backend API for registering and validating product handovers across the supply chain. Uses blockchain to ensure traceability and tamper detection.",
+        link: "https://github.com/ms-vishwanath/blox-server",
+      },
+      {
+        name: "FaceMatch API – AWS Rekognition Face Upload & Search",
+        description:
+          "Express router for face recognition using AWS Rekognition. Upload, index, and search photos with face comparison and collection listing features.",
+        link: "https://github.com/ms-vishwanath/facematch-api",
+      },
+      {
+        name: "Maizzle Mail – Email Template Starter",
+        description:
+          "A developer-friendly starter kit for building responsive, production-ready HTML email templates using Maizzle and Tailwind CSS. Includes modular components, live preview, and optimized email output for all major clients.",
+        link: "https://github.com/ms-vishwanath/maizzle-mail-template-starter",
+      },
+      {
+        name: "Embedded C Library Manual Overrides",
+        description:
+          "Contains Set of Manually Overwritted Embedded C Libraries",
+        link: "https://drive.google.com/drive/folders/1Q_ZXfZWphJWaOqmdxRvIZ5Sef4Y2lx0C?usp=sharing",
+      },
+      {
+        name: "BT Transmitter Receiver",
+        description:
+          "A hardware communication module using Embedded C for wireless Bluetooth-based data transfer between microcontrollers.",
+        link: "https://github.com/ms-vishwanath/bt-transmitter-reciever",
+      },
+      {
+        name: "Digital Current Tester",
+        description:
+          "A real-time digital current measurement device programmed in Embedded C for accurate readings on low-cost hardware.",
+        link: "https://github.com/ms-vishwanath/digital-current-tester",
+      },
+      {
+        name: "ESP8266 Firebase Cloud",
+        description:
+          "An IoT setup using Embedded C to connect ESP8266 with Firebase Cloud for real-time data sync and control.",
+        link: "https://github.com/ms-vishwanath/esp8266-firebase-cloud",
+      },
+      {
+        name: "Fingerprint Relay Lock",
+        description:
+          "An Embedded C-based fingerprint authentication system that controls a relay lock for secure access.",
+        link: "https://github.com/ms-vishwanath/fingerprint-relay-lock",
+      },
+      {
+        name: "Gyro-Based Accident Detection System",
+        description:
+          "A gyroscope-powered accident detection module programmed in Embedded C to alert or act during vehicular impact.",
+        link: "https://github.com/ms-vishwanath/gyro-based-accident-detection-system",
       },
     ],
   },
 ];
+
+// const my_works = [
+//   {
+//     title: "Web Applications & Tools",
+//     projects: [
+//       {
+//         name: "Shorto",
+//         description:
+//           "A fast, free tool to shorten your URLs with ease and style.",
+//         link: "https://shorto-one.vercel.app/",
+//       },
+//       {
+//         name: "Functionary",
+//         description:
+//           "A centralized hub to store, discover, and share useful code functions with others.",
+//         link: "https://functionary.vercel.app/",
+//       },
+//       {
+//         name: "Problem Painter",
+//         description:
+//           "A canvas where your thoughts take shape and problems find their answers.",
+//         link: "https://problem-painter.vercel.app/",
+//       },
+//       {
+//         name: "Tic Tac Tribe",
+//         description:
+//           "Create or join a game using a simple room code. Real-time, multiplayer, and completely free.",
+//         link: "https://tic-tac-tribe.web.app/",
+//       },
+//       {
+//         name: "Quote of the Day",
+//         description:
+//           "Generates a random quote for Every user which refreshes once a day !",
+//         link: "https://quote-of-the-day-three.vercel.app/",
+//       },
+//       {
+//         name: "Pixto",
+//         description:
+//           "Quickly convert PNG, JPEG, JPG, and SVG image to your preferred format with PIXTO. Fast, reliable, and free!",
+//         link: "https://pixto.vercel.app/",
+//       },
+//       {
+//         name: "Check My Sound",
+//         description:
+//           "A tool which helps easily test left, right, and surround audio channels of your headphones or speakers.",
+//         link: "https://checkmysound.web.app/",
+//       },
+//       {
+//         name: "Data To QR",
+//         description: "Generate QR codes easily from your data or URLs.",
+//         link: "https://data-to-qr.web.app/",
+//       },
+//       {
+//         name: "AAim 360",
+//         description:
+//           "A Multi serviced WEB tool library of an startup named AAIM!",
+//         link: "https://aaim360.web.app/",
+//       },
+//       {
+//         name: "One Stop",
+//         description:
+//           "A platform that enables startups to scout the right investors, gov grants and the right pilot opportunities for their startup,",
+//         link: "https://1-stop.web.app/",
+//       },
+//       {
+//         name: "Jayam Scoring",
+//         description:
+//           "A premium showcase site built for a leading fashion packaging brand, blending modern design with industrial elegance.",
+//         link: "https://jayamscoring.in/",
+//       },
+//       {
+//         name: "Sasi Transports",
+//         description:
+//           "A clean and responsive transport service website built for a logistics brand.",
+//         link: "https://sasi-transports.web.app/",
+//       },
+//       {
+//         name: "Cloud Hub",
+//         description:
+//           "Manage, monitor, and analyze your IoT devices in one powerful platform. Get started with Cloud Hub today.",
+//         link: "https://cloud-hub-alpha.web.app/",
+//       },
+//       {
+//         name: "Timely",
+//         description:
+//           "A simple, sleek, and accurate stopwatch for all your timing needs—perfect for workouts, productivity, and more.",
+//         link: "https://timely-lovat.vercel.app/",
+//       },
+//       {
+//         name: "Track Your IP",
+//         description:
+//           "A minimal IP tracking tool that fetches and displays your public IP with geolocation details in real-time.",
+//         link: "https://track-your-ip.web.app/",
+//       },
+//       {
+//         name: "Mahee Solutions",
+//         description:
+//           "A professional website for a mystery shopping firm with 12+ years of expertise, showcasing their audit services, industry reach, and data-driven insights.",
+//         link: "https://www.maheesolutions.in/",
+//       },
+//       {
+//         name: "AMGC",
+//         description:
+//           "A visually engaging site with smooth scroll animations for AMGC, showcasing the companies.",
+//         link: "https://amgc-beta.web.app/",
+//       },
+//       {
+//         name: "WYF Events",
+//         description:
+//           "An Non Governmental organization's event showcase application!",
+//         link: "https://wyfonline.org/",
+//       },
+//       {
+//         name: "AKS Associates",
+//         description:
+//           "A Minimalistic CRM Which connects auditors and clients, IT Filing is much easier!",
+//         link: "https://www.livetaxation.com/sign-in/",
+//       },
+//       {
+//         name: "CodeZCorp Academy",
+//         description:
+//           "An academy for developers, designers, and DevOps enthusiasts—building a strong tech community through expert-led learning.",
+//         link: "https://www.codezcorp.com/",
+//       },
+//       {
+//         name: "Cloud 360",
+//         description:
+//           "A personalized web application for individuals for managing their home at smart remotes with digital twin and automation!",
+//         link: "https://cloud360.web.app/",
+//       },
+//       {
+//         name: "FarmHub360",
+//         description:
+//           "A multilingual farm hub platform where farmers can seamlessly buy and sell produce, enhancing accessibility and local trade.",
+//         link: "https://aaim360.web.app/tools/farmhub360.html",
+//       },
+//       {
+//         name: "Code Saver",
+//         description:
+//           "A handy web-based snippet manager to save, organize, and access your frequently used code with ease.",
+//         link: "https://aaim360.web.app/tools/CODESAVER/index.html",
+//       },
+//       {
+//         name: "RadCal",
+//         description:
+//           "A stylish and responsive calculator app with support for basic operations.",
+//         link: "https://radcal.web.app/",
+//       },
+//       {
+//         name: "RadLoc Todo",
+//         description:
+//           "A minimalist to-do app that stores tasks locally for offline use.",
+//         link: "https://radloctodo.web.app/",
+//       },
+//       {
+//         name: "RadPincode",
+//         description:
+//           "A simple tool to retrieve address details via the Indian Pincode API.",
+//         link: "https://radpincode.web.app/",
+//       },
+//       {
+//         name: "Chronologix",
+//         description:
+//           "An enterprise-level check-in/check-out and HR management system with modules like employee master, scheduling, self-services, device control, and real-time reporting.",
+//         link: "https://org-360-7c4d3.web.app/",
+//       },
+//       {
+//         name: "SSBAT Invoice Generator",
+//         description:
+//           "A trustworthy tool designed to create precise, invoices with client side computing.",
+//         link: "https://ssbat-invoice-generator.web.app/",
+//       },
+//       {
+//         name: "INXT Website",
+//         description:
+//           "A modern portfolio site for an insurance-focused IT firm highlighting services and digital innovation.",
+//         link: "https://inxt-website.vercel.app/",
+//       },
+//       {
+//         name: "Insurance Agent Portal",
+//         description:
+//           "A legacy streamlined web platform empowering agents to manage policies, clients, and claims efficiently.",
+//         link: "https://insurance-agent-portal.vercel.app/",
+//       },
+//       {
+//         name: "Raise Angel Investor Network",
+//         description:
+//           "Blazing Portfolio of the Raise Angel Investor Startup Network",
+//         link: "https://raiseain.web.app/",
+//       },
+//       {
+//         name: "Yemen Mission",
+//         description:
+//           "A non-profit website built to support education, relief, and development efforts across Yemen.",
+//         link: "https://www.yemenmission.org/",
+//       },
+//       {
+//         name: "Ambigai Motors Car Care",
+//         description:
+//           "A professional service website for a car care and detailing center, showcasing services, bookings, and brand presence.",
+//         link: "https://github.com/vishandcode/ambigai-motors-car-care",
+//       },
+//     ],
+//   },
+//   {
+//     title: "AI/ML Projects",
+//     projects: [
+//       {
+//         name: "Leaf Lens",
+//         description:
+//           "Mobile-first app for real-time plant leaf identification and disease detection.",
+//         link: "https://leaf-lens.vercel.app/",
+//       },
+//       {
+//         name: "Workshop AI",
+//         description:
+//           "AI-driven image analyzer that detects technical issues and recommends solutions.",
+//         link: "https://workshop-ai-gilt.vercel.app/",
+//       },
+//       {
+//         name: "DocType Finder",
+//         description:
+//           "A Tesseract.js-based tool that detects PAN or Aadhaar cards from images using OCR.",
+//         link: "https://doctypefinder.web.app/",
+//       },
+//       {
+//         name: "Text to Speech 360",
+//         description:
+//           "A simple and effective text-to-speech tool that converts written text into spoken words with natural voice synthesis.",
+//         link: "https://aaim360.web.app/tools/TTS.html",
+//       },
+//       {
+//         name: "Speech to Text 360",
+//         description:
+//           "A fast and lightweight tool that turns speech into text with real-time accuracy.",
+//         link: "https://aaim360.web.app/tools/STT.html",
+//       },
+//       {
+//         name: "Gesture 360",
+//         description:
+//           "A real-time hand gesture recognition app powered by MediaPipe, running fully in the browser.",
+//         link: "https://aaim360.web.app/tools/GESTURE360/index.html",
+//       },
+//       {
+//         name: "Image to Text 360",
+//         description:
+//           "A JavaScript-powered tool that extracts text from images directly in the browser using OCR technology.",
+//         link: "https://aaim360.web.app/tools/ITT.html",
+//       },
+//       {
+//         name: "Fine Accident Detection",
+//         description:
+//           "A browser-based accident detection app using gyroscope data to sense crashes and trigger alerts.",
+//         link: "https://minihackathon-practice.web.app/fineaccidentdetectionclient.html",
+//       },
+//       {
+//         name: "FaceMatch API – AWS Rekognition Face Upload & Search",
+//         description:
+//           "Express router for face recognition using AWS Rekognition. Upload, index, and search photos with face comparison and collection listing features.",
+//         link: "https://github.com/ms-vishwanath/facematch-api",
+//       },
+//     ],
+//   },
+//   {
+//     title: "Telegram Bots",
+//     projects: [
+//       {
+//         name: "Vish's Assistant",
+//         description: "A telegram bot which holds Information about Vishwanath",
+//         link: "https://t.me/AboutVishBot",
+//       },
+//       {
+//         name: "Get The Trend",
+//         description:
+//           "A telegram bot which scraps top 5 recent posts on instagram using hashtag",
+//         link: "https://github.com/ms-vishwanath/get-the-trend",
+//       },
+//     ],
+//   },
+//   {
+//     title: "Backend Services & Integrations",
+//     projects: [
+//       {
+//         name: "Clerk Auth-Appwrite Webhook Integration",
+//         description:
+//           "This project implements a webhook endpoint to handle Clerk authentication events and sync user data with Appwrite using a serverless route in Next.js.",
+//         link: "https://github.com/ms-vishwanath/appwrite-clerk-auth-integration-next-js",
+//       },
+//       {
+//         name: "AWS Node JS S3 Service",
+//         description:
+//           "A simple production-ready Node.js microservice to upload, replace, and delete files on AWS S3 using TypeScript, Express.js, and AWS SDK v3.",
+//         link: "https://github.com/ms-vishwanath/aws-file-service",
+//       },
+//       {
+//         name: "NextJS SMTP Mail Service",
+//         description:
+//           "Next JS Powered Mail service useful for integrating email smtp into next js apps",
+//         link: "https://github.com/ms-vishwanath/nextjs-smtp",
+//       },
+//       {
+//         name: "NextJS Phonepe",
+//         description:
+//           "PhonePe payment gateway integration with Next.js application",
+//         link: "https://github.com/ms-vishwanath/nextjs-phonepe",
+//       },
+//       {
+//         name: "Express Production Starter Template",
+//         description:
+//           "Express Typeorm, Mongodb, Postgres Dual DB Production level starter template for saving time.",
+//         link: "https://github.com/ms-vishwanath/express-production-starter-template",
+//       },
+//       {
+//         name: "Express Postgres Typeorm Auth Service",
+//         description:
+//           "Express Typeorm Auth Service with role and access management.",
+//         link: "https://github.com/ms-vishwanath/express-postgres-auth-service",
+//       },
+//       {
+//         name: "Express Server with Prometheus Metrics",
+//         description:
+//           "A production-ready Express.js server setup with Prometheus metrics integration using express-prom-bundle.",
+//         link: "https://github.com/ms-vishwanath/express-prom-client",
+//       },
+//       {
+//         name: "Automated Contact Form Validator",
+//         description:
+//           "Express TS Vercel Cron Based Automated Web Functionality Checker for Wordpress, CMS etc.,",
+//         link: "https://github.com/ms-vishwanath/automated-contact-form-validator",
+//       },
+//       {
+//         name: "BLOX Express – QR Ledger Engine",
+//         description:
+//           "Backend API for registering and validating product handovers across the supply chain. Uses blockchain to ensure traceability and tamper detection.",
+//         link: "https://github.com/ms-vishwanath/blox-server",
+//       },
+//     ],
+//   },
+//   {
+//     title: "Web Templates & Utilities",
+//     projects: [
+//       {
+//         name: "Diwali Greeting App",
+//         description: "A fun and personalized Diwali greeting app",
+//         link: "https://github.com/ms-vishwanath/dynamic-diwali-wishes",
+//       },
+//       {
+//         name: "Kongunadu Kalaiculoo",
+//         description:
+//           "Beautiful Portfolio of Kongunadu Kalaiculoo – South Indian Traditional Dance Ensemble",
+//         link: "https://github.com/ms-vishwanath/nextjs-clerkauth-instantdb",
+//       },
+//       {
+//         name: "NextJS Clerk Auth Instant DB",
+//         description:
+//           "A Next.js-powered To-Do app with Clerk authentication and instant database integration.",
+//         link: "https://github.com/ms-vishwanath/nextjs-clerkauth-instantdb",
+//       },
+//       {
+//         name: "SIN Generator",
+//         description:
+//           "A utility tool that generates unique screen identification numbers (SIDs) for tracking UI screens across enterprise software systems.",
+//         link: "https://github.com/ms-vishwanath/sin-generator",
+//       },
+//       {
+//         name: "Next JS SSR Template",
+//         description:
+//           "Next JS Tempate for Static Site Rendering/Generation with forms, custom components and validation ready for file manager hosting!",
+//         link: "https://github.com/ms-vishwanath/nextjs-ssr-template",
+//       },
+//       {
+//         name: "BLOX – Secure Product Tracking",
+//         description:
+//           "A Next.js-powered web app that verifies tamper-proof QR codes and shows product journey through the blockchain-based distributor ledger network.",
+//         link: "https://github.com/ms-vishwanath/blox-web",
+//       },
+//       {
+//         name: "Maizzle – Email Template Starter",
+//         description:
+//           "A developer-friendly starter kit for building responsive, production-ready HTML email templates using Maizzle and Tailwind CSS. Includes modular components, live preview, and optimized email output for all major clients.",
+//         link: "https://github.com/ms-vishwanath/maizzle-mail-template-starter",
+//       },
+//     ],
+//   },
+//   {
+//     title: "Embedded Systems & Robotics",
+//     projects: [
+//       {
+//         name: "Human Following Robot",
+//         description:
+//           "A robotics project using sensors and Embedded C to track and follow human movement with autonomous logic.",
+//         link: "https://github.com/ms-vishwanath/human-following-robot",
+//       },
+//       {
+//         name: "Single Hand Robot Arm Controller",
+//         description:
+//           "An assistive controller for robotic arms using Embedded C to interpret inputs from a single-hand joystick or switches.",
+//         link: "https://github.com/ms-vishwanath/single-hand-robot-arm-controller",
+//       },
+//       {
+//         name: "Ultrasonic Sensor Tester",
+//         description:
+//           "A testing module using Embedded C to visualize and validate distance readings from ultrasonic sensors.",
+//         link: "https://github.com/ms-vishwanath/ultrasonic-sensor-tester",
+//       },
+//       {
+//         name: "Weather Station",
+//         description:
+//           "An Embedded C-powered hardware weather station that reads temperature, humidity, and other data via sensors.",
+//         link: "https://github.com/ms-vishwanath/weather-station",
+//       },
+//       {
+//         name: "Gyro Tester Kit",
+//         description:
+//           "A hardware test kit built with Embedded C to validate and debug gyroscopic sensors used in motion applications.",
+//         link: "https://github.com/ms-vishwanath/gyro-tester-kit",
+//       },
+//       {
+//         name: "WebRanger Mini",
+//         description:
+//           "A miniaturized web-enabled monitoring device using Embedded C to collect and push sensor data online.",
+//         link: "https://github.com/ms-vishwanath/webranger-mini",
+//       },
+//       {
+//         name: "WebRanger Pro",
+//         description:
+//           "An advanced version of the WebRanger device built with Embedded C, offering better sensor handling and network features.",
+//         link: "https://github.com/ms-vishwanath/webranger-pro",
+//       },
+//       {
+//         name: "Embedded C Library Manual Overrides",
+//         description:
+//           "Contains Set of Manually Overwritten Embedded C Libraries",
+//         link: "https://drive.google.com/drive/folders/1Q_ZXfZWphJWaOqmdxRvIZ5Sef4Y2lx0C?usp=sharing",
+//       },
+//       {
+//         name: "BT Transmitter Receiver",
+//         description:
+//           "A hardware communication module using Embedded C for wireless Bluetooth-based data transfer between microcontrollers.",
+//         link: "https://github.com/ms-vishwanath/bt-transmitter-reciever",
+//       },
+//       {
+//         name: "Digital Current Tester",
+//         description:
+//           "A real-time digital current measurement device programmed in Embedded C for accurate readings on low-cost hardware.",
+//         link: "https://github.com/ms-vishwanath/digital-current-tester",
+//       },
+//       {
+//         name: "ESP8266 Firebase Cloud",
+//         description:
+//           "An IoT setup using Embedded C to connect ESP8266 with Firebase Cloud for real-time data sync and control.",
+//         link: "https://github.com/ms-vishwanath/esp8266-firebase-cloud",
+//       },
+//       {
+//         name: "Fingerprint Relay Lock",
+//         description:
+//           "An Embedded C-based fingerprint authentication system that controls a relay lock for secure access.",
+//         link: "https://github.com/ms-vishwanath/fingerprint-relay-lock",
+//       },
+//       {
+//         name: "Gyro-Based Accident Detection System",
+//         description:
+//           "A gyroscope-powered accident detection module programmed in Embedded C to alert or act during vehicular impact.",
+//         link: "https://github.com/ms-vishwanath/gyro-based-accident-detection-system",
+//       },
+//     ],
+//   },
+// ];
 
 export const techStacks = [
   {
