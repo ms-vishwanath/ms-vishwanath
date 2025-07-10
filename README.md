@@ -64,12 +64,6 @@ Full-stack developer passionate about building **fast**, **scalable**, and **mea
 
 ---
 
-## 🔗 Connect With Me
 
-- 🧑‍💻 **GitHub:** [github.com/ms-vishwanath](https://github.com/ms-vishwanath)  
-- 📬 **Email:** [msvishwanath@outlook.com](mailto:msvishwanath@outlook.com)  
-- 📱 **Phone:** [+91 97900 06831](tel:+919790006831)  
-
----
 
 > _Let’s build something impactful together!_
