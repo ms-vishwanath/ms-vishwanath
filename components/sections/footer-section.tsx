@@ -28,37 +28,37 @@ export default function FooterSection() {
               height={300}
               alt="signature"
             />
-            {/* <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
               <MdPhone className="text-xl " />
               <Link href={socialLinks?.phone?.link}>
                 <span className="text-xl">{socialLinks?.phone?.name}</span>
               </Link>
-            </div> */}
-            {/* <div className="flex items-center gap-3">
+            </div>
+            <div className="flex items-center gap-3">
               <MdEmail className="text-xl " />
               <Link href={socialLinks?.email?.link} target="_noblank">
                 <span className="text-xl">{socialLinks?.email?.name}</span>
               </Link>
-            </div> */}
-            {/* <div className="flex items-center gap-3">
+            </div>
+            <div className="flex items-center gap-3">
               <SiGithub className="text-xl " />
               <Link href={socialLinks?.github?.link} target="_noblank">
                 <span className="text-xl">{socialLinks?.github?.name}</span>
               </Link>
-            </div> */}
-            {/* <div className="flex items-center gap-3">
+            </div>
+            <div className="flex items-center gap-3">
               <AiFillLinkedin className="text-xl text-[#0077B5] " />
               <Link href={socialLinks?.linkedin?.link} target="_noblank">
                 <span className="text-xl">{socialLinks?.linkedin?.name}</span>
               </Link>
-            </div> */}
+            </div>
           </div>
           <div className=" flex flex-col gap-2 cursor-pointer">
             <a onClick={() => smoothScrollToId("tech-stack")}>Tech Stack</a>
             <a onClick={() => smoothScrollToId("projects")}>My Projects</a>
-            {/* <a href="/VISHWANATH-RESUME.pdf" download>
+            <a href="/VISHWANATH-RESUME.pdf" download>
               Download Resume
-            </a> */}
+            </a>
           </div>
         </div>
         <div className="w-full flex justify-center">
