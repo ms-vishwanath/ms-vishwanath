@@ -1,4 +1,4 @@
-import Menu from "@/components/menu";
+import Minimap from "@/components/minimap";
 import { Drive, Road } from "@/components/game/drive";
 import Start from "@/components/sections/start";
 import About from "@/components/sections/about";
@@ -10,7 +10,7 @@ import { AI, Contact, Leadership, Venture } from "@/components/sections/rest";
 export default function Page() {
   return (
     <>
-      <Menu />
+      <Minimap />
       <Drive />
       <main className="relative">
         <Road />

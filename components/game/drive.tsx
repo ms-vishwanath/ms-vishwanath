@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Lenis from "lenis";
+import { AnimatePresence, motion } from "framer-motion";
+import { Gamepad2, Plus } from "lucide-react";
 import { coinSkills, TechIcon } from "@/lib/tech";
 import { profile } from "@/lib/profile";
 
@@ -64,6 +66,7 @@ export function Drive() {
   const [started, setStarted] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [color, setColor] = useState("#ff6b35");
+  const [pad, setPad] = useState(false);
 
   useEffect(() => {
     const map: Record<string, keyof Keys> = {
@@ -249,14 +252,40 @@ export function Drive() {
         <span>to drive · or just scroll</span>
       </div>
 
-      {/* touch pad */}
-      <div className="fixed bottom-4 right-4 z-40 grid grid-cols-3 gap-1.5 md:hidden" style={{ touchAction: "none" }}>
-        <span />
-        <button className="pad" aria-label="Up" {...hold("up")}>↑</button>
-        <span />
-        <button className="pad" aria-label="Left" {...hold("left")}>←</button>
-        <button className="pad" aria-label="Down" {...hold("down")}>↓</button>
-        <button className="pad" aria-label="Right" {...hold("right")}>→</button>
+      {/* mobile joystick: one icon that blooms into arrows */}
+      <div className="fixed bottom-5 right-5 z-40 md:hidden" style={{ touchAction: "none" }}>
+        <AnimatePresence>
+          {pad &&
+            ([
+              ["up", "↑", 0, -64],
+              ["left", "←", -64, 0],
+              ["right", "→", 64, 0],
+              ["down", "↓", 0, 64],
+            ] as const).map(([k, l, x, y], i) => (
+              <motion.button
+                key={k}
+                aria-label={k}
+                className="pad absolute left-1 top-1"
+                initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+                animate={{ x: x - 70, y: y - 70, scale: 1, opacity: 1 }}
+                exit={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 420, damping: 22, delay: i * 0.03 }}
+                {...hold(k)}
+              >
+                {l}
+              </motion.button>
+            ))}
+        </AnimatePresence>
+        <motion.button
+          onClick={() => setPad((v) => !v)}
+          aria-label={pad ? "Hide joystick" : "Show joystick"}
+          animate={{ rotate: pad ? 135 : 0, x: pad ? -70 : 0, y: pad ? -70 : 0, background: pad ? "#1d1b2e" : "#ffc93c" }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="relative z-10 grid size-[60px] place-items-center rounded-full border-2 border-ink shadow-[0_4px_0_var(--ink)]"
+        >
+          {pad ? <Plus className="size-6 text-white" /> : <Gamepad2 className="size-7" />}
+          {!pad && <span className="absolute inset-0 animate-ping rounded-full border-2 border-ink/40" />}
+        </motion.button>
       </div>
     </>
   );
