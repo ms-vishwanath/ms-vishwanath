@@ -7,22 +7,29 @@ import { profile } from "@/lib/profile";
 import { StartArt } from "@/components/illustrations";
 import { Gate, SplitText } from "@/components/ui";
 import { TechIcon } from "@/lib/tech";
+import { useReady } from "@/components/loader";
 
-const floaters = ["React", "Next.js", "Node.js", "Python", "PostgreSQL", "Docker", "GraphQL", "Gemini API", "Redis", "TypeScript"];
+const floaters: [string, number, number][] = [
+  ["React", 58, 9], ["Next.js", 74, 6], ["Node.js", 90, 12], ["TypeScript", 96, 30],
+  ["Python", 95, 52], ["PostgreSQL", 93, 74], ["Docker", 80, 88], ["GraphQL", 64, 91],
+  ["Gemini API", 52, 80], ["Redis", 54, 22],
+];
 
 export default function Start() {
+  const ready = useReady();
   return (
     <section id="start" data-stop="Start" style={{ background: "#fff6d6", ["--accent" as string]: "#ffc93c" }} className="relative min-h-svh overflow-hidden">
       <Gate index="00" label="Start" accent="#ffc93c" />
       <div className="dots pointer-events-none absolute inset-0" />
 
+      {ready && (<>
       {/* floating stack icons */}
-      <div className="road-pad pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
-        {floaters.map((f, i) => (
+      <div className="pointer-events-none absolute inset-0 z-20 hidden lg:block" aria-hidden>
+        {floaters.map(([f, x, y], i) => (
           <motion.span
             key={f}
             className="absolute grid size-12 place-items-center rounded-2xl border-2 border-ink bg-white shadow-[3px_3px_0_var(--ink)]"
-            style={{ left: `${62 + ((i * 37) % 33)}%`, top: `${10 + ((i * 53) % 80)}%` }}
+            style={{ left: `calc(${x}% - 24px)`, top: `${y}%` }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1, y: [0, -12, 0], rotate: [0, i % 2 ? 6 : -6, 0] }}
             transition={{ opacity: { delay: 0.6 + i * 0.07 }, scale: { delay: 0.6 + i * 0.07, type: "spring" }, y: { duration: 3 + (i % 3), repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 4 + (i % 2), repeat: Infinity } }}
@@ -86,12 +93,13 @@ export default function Start() {
                 <p className="text-sm text-ink/70">Drive with <b>WASD</b> or <b>arrow keys</b>.<br />Hit the icons on the road to collect skills.</p>
               </motion.div>
             </div>
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, type: "spring", stiffness: 80 }} className="relative z-10 mx-auto w-full max-w-lg lg:col-span-5">
+            <motion.div initial={{ opacity: 0, y: -260, rotate: -8 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ delay: 0.35, type: "spring", stiffness: 90, damping: 12 }} className="relative z-10 mx-auto w-full max-w-lg lg:col-span-5">
               <StartArt />
             </motion.div>
           </div>
         </div>
       </div>
+      </>)}
     </section>
   );
 }

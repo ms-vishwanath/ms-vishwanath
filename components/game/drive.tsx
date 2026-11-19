@@ -265,7 +265,7 @@ export function Drive() {
 
   return (
     <>
-      <div ref={carRef} className="pointer-events-none fixed left-0 top-0 z-40 will-change-transform" style={{ width: CAR_W, height: CAR_H }}>
+      <div ref={carRef} data-car className="pointer-events-none fixed left-0 top-0 z-40 will-change-transform" style={{ width: CAR_W, height: CAR_H }}>
         <Car color={color} />
       </div>
 
@@ -294,7 +294,7 @@ export function Drive() {
       )}
 
       {/* key hint */}
-      <div className={`fixed bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-3 rounded-2xl border-2 border-ink bg-white px-4 py-2 text-sm shadow-[4px_4px_0_var(--ink)] transition-all duration-700 md:flex ${started ? "pointer-events-none translate-y-24 opacity-0" : ""}`}>
+      <div className={`kbd-hint fixed bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-3 rounded-2xl border-2 border-ink bg-white px-4 py-2 text-sm shadow-[4px_4px_0_var(--ink)] transition-all duration-700 md:flex ${started ? "pointer-events-none translate-y-24 opacity-0" : ""}`}>
         <span className="flex gap-1">
           {["W", "A", "S", "D"].map((k) => <kbd key={k} className="kbd">{k}</kbd>)}
         </span>

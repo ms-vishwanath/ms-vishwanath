@@ -142,3 +142,12 @@ html.lenis, html.lenis body { height: auto; }
 .pg { display: inline-grid; place-items: center; min-width: 42px; height: 42px; padding: 0 10px; border-radius: 12px; background: #fff;
   border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); font-weight: 700; font-size: 14px; transition: transform .15s, background .2s; }
 .pg:hover { background: #ffc93c; transform: translateY(-2px); }
+
+/* Loader */
+html.loading, html.loading body { overflow: hidden; }
+html.loading .hud, html.loading [data-car], html.loading .coin, html.loading .cone, html.loading [aria-label="Open map"] { opacity: 0; }
+.ld-lane { background: repeating-linear-gradient(90deg, #ffc93c 0 22px, transparent 22px 44px); animation: lane .5s linear infinite; }
+@keyframes lane { to { background-position: -44px 0; } }
+.ld-puff { animation: puff .6s ease-out infinite; }
+@keyframes puff { from { transform: translate(0,-50%) scale(.6); opacity: .7; } to { transform: translate(-22px,-50%) scale(1.8); opacity: 0; } }
+.ld-car { transition: left .25s ease-out; }
