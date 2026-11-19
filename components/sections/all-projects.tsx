@@ -24,7 +24,7 @@ export default function AllProjects() {
   );
 
   return (
-    <div className="mt-24">
+    <div>
       <Reveal className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mono inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#ffc93c] px-3 py-1 text-xs font-bold shadow-[3px_3px_0_var(--ink)]">THE FULL LOT</p>
