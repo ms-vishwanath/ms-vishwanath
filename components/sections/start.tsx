@@ -47,7 +47,7 @@ export default function Start() {
                 <span className="size-2 animate-pulse rounded-full bg-[#22c55e]" /> Full Stack AI Developer · open for freelance & training
               </motion.p>
               <p className="mt-7 text-xl font-semibold text-ink/70 sm:text-2xl">Hey, I&apos;m</p>
-              <h1 className="relative -ml-1 whitespace-nowrap text-[clamp(3.4rem,8.2vw,8.4rem)] font-bold leading-[0.9] tracking-tighter">
+              <h1 className="relative -ml-1 whitespace-nowrap text-[clamp(2.5rem,14.5vw,8.4rem)] lg:text-[clamp(3.4rem,8.2vw,8.4rem)] font-bold leading-[0.9] tracking-tighter">
                 <span className="relative z-10">
                   {"Vishwanath".split("").map((ch, i) => (
                     <motion.span

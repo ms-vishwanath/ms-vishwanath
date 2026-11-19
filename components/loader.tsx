@@ -92,17 +92,17 @@ export default function Loader({ children }: { children: ReactNode }) {
                 <div className="ld-lane absolute inset-x-4 top-1/2 h-1 -translate-y-1/2" />
               </div>
               <div className="absolute left-0 top-1/2 h-12 -translate-y-1/2 rounded-full border-2 border-ink bg-[#ffc93c]/90" style={{ width: `${Math.max(12, pct)}%` }} />
-              <div className="ld-car absolute top-1/2 -translate-y-1/2" style={{ left: `calc(${pct}% - ${pct * 0.58}px)` }}>
-                <svg viewBox="0 0 58 34" width={58} height={34} className="drop-shadow-[2px_3px_0_rgba(29,27,46,.35)]">
-                  <rect x="9" y="1" width="11" height="5" rx="2" fill="#1d1b2e" />
-                  <rect x="38" y="1" width="11" height="5" rx="2" fill="#1d1b2e" />
-                  <rect x="9" y="28" width="11" height="5" rx="2" fill="#1d1b2e" />
-                  <rect x="38" y="28" width="11" height="5" rx="2" fill="#1d1b2e" />
-                  <rect x="2" y="4" width="54" height="26" rx="9" fill="#ff6b35" stroke="#1d1b2e" strokeWidth="2" />
-                  <rect x="34" y="8" width="10" height="18" rx="3" fill="#bae6fd" stroke="#1d1b2e" strokeWidth="1.5" />
-                  <rect x="12" y="8" width="7" height="18" rx="3" fill="#bae6fd" stroke="#1d1b2e" strokeWidth="1.5" />
-                  <circle cx="53" cy="9" r="2" fill="#fff59d" />
-                  <circle cx="53" cy="25" r="2" fill="#fff59d" />
+              <div className="ld-car absolute top-1/2 -translate-y-1/2" style={{ left: `calc(${pct}% - ${pct * 0.7}px)` }}>
+                <svg viewBox="0 0 70 30" width={70} height={30} className="drop-shadow-[2px_3px_0_rgba(29,27,46,.35)]">
+                  {/* side-profile supercar, facing right */}
+                  <path d="M3 21 L4 15 L6 13 L1.5 11 L1.5 8 L9 8 L10 11 L22 9 Q30 3 38 3 Q46 3 54 10 L64 13 Q68 14 68 18 L67 21 Z" fill="#ff6b35" stroke="#1d1b2e" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M26 10 Q32 5 38 5 Q44 5 49 10 Z" fill="#1e293b" stroke="#1d1b2e" strokeWidth="1.5" />
+                  <path d="M30 9.5 Q34 6.5 38 6.5 L37 9.5 Z" fill="#bae6fd" />
+                  <path d="M40 13 L48 13 L45 17 Z" fill="#1d1b2e" />
+                  <path d="M8 15 L60 15" stroke="#fff" strokeWidth="1.6" opacity=".85" />
+                  <path d="M63 14.5 L67 15.5" stroke="#fff59d" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="17" cy="21" r="6" fill="#1d1b2e" /><circle cx="17" cy="21" r="2.4" fill="#cbd5e1" />
+                  <circle cx="54" cy="21" r="6" fill="#1d1b2e" /><circle cx="54" cy="21" r="2.4" fill="#cbd5e1" />
                 </svg>
                 <span className="ld-puff absolute -left-4 top-1/2 size-3 -translate-y-1/2 rounded-full bg-ink/20" />
               </div>

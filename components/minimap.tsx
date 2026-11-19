@@ -75,10 +75,28 @@ function MapSvg({ big, onPick, pos }: { big?: boolean; onPick?: (id: string) => 
     <svg viewBox="0 0 1000 1400" className={big ? "h-full w-auto max-w-full" : "h-full w-full"} aria-hidden={!big}>
       {big && (
         <>
-          {/* terrain blobs */}
-          {[[120, 300, "#c7f9cc"], [880, 520, "#bde0fe"], [140, 900, "#ffd6e8"], [860, 1150, "#fde68a"], [500, 700, "#e9d5ff"]].map(([x, y, c], i) => (
-            <ellipse key={i} cx={x as number} cy={y as number} rx={170} ry={110} fill={c as string} className="map-terrain" />
-          ))}
+          {/* little islands beside each stop: outlined blob, trees and a building in the stop colour */}
+          {stops.map((st, i) => {
+            const x = i % 2 ? 175 : 825, y = PTS[i].y;
+            const d = `M${x - 95} ${y} C${x - 100} ${y - 52} ${x - 30} ${y - 70} ${x + 10} ${y - 58} C${x + 60} ${y - 75} ${x + 105} ${y - 30} ${x + 92} ${y + 8} C${x + 104} ${y + 50} ${x + 40} ${y + 70} ${x - 10} ${y + 58} C${x - 60} ${y + 72} ${x - 104} ${y + 40} ${x - 95} ${y} Z`;
+            return (
+              <g key={st.id} className="map-terrain">
+                <path d={d} fill={st.color} opacity={0.28} />
+                <path d={d} fill="none" stroke="#1d1b2e" strokeWidth={4} strokeDasharray="2 10" strokeLinecap="round" />
+                <g transform={`translate(${x - 18} ${y - 6})`}>
+                  <rect x={-22} y={-26} width={44} height={36} rx={4} fill="#fff" stroke="#1d1b2e" strokeWidth={4} />
+                  <path d="M-28 -24 L0 -48 L28 -24 Z" fill={st.color} stroke="#1d1b2e" strokeWidth={4} strokeLinejoin="round" />
+                  <rect x={-7} y={-8} width={14} height={18} fill={st.color} stroke="#1d1b2e" strokeWidth={3} />
+                </g>
+                {[[42, -18], [58, 22]].map(([tx, ty], k) => (
+                  <g key={k} transform={`translate(${x + tx} ${y + ty})`}>
+                    <rect x={-3} y={0} width={6} height={16} fill="#8b5a2b" stroke="#1d1b2e" strokeWidth={2.5} />
+                    <circle r={15} cy={-6} fill={k ? "#16a34a" : "#2ec27e"} stroke="#1d1b2e" strokeWidth={3.5} />
+                  </g>
+                ))}
+              </g>
+            );
+          })}
         </>
       )}
       <path d={ROUTE} fill="none" stroke="#1d1b2e" strokeWidth={big ? 64 : 90} strokeLinecap="round" />

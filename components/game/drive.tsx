@@ -26,9 +26,9 @@ export function Road() {
     <div className="pointer-events-none absolute inset-0 z-30" aria-hidden>
       {coinSkills.map((s, i) => {
         const top = 3 + (i / coinSkills.length) * 94 + (rnd(i) - 0.5) * 2.2;
-        const left = 4 + rnd(i + 99) * 92;
+        const side = rnd(i + 99) > 0.5 ? "r" : "l";
         return (
-          <div key={s} data-coin={s} className="coin" style={{ top: `${top}%`, left: `${left}%` }}>
+          <div key={s} data-coin={s} className={`coin ${side}`} style={{ top: `${top}%`, ["--f" as string]: 0.3 + rnd(i + 42) * 0.45 }}>
             <span className="coin-face" style={{ animationDelay: `${-rnd(i + 7) * 1.6}s` }}>
               <TechIcon name={s} className="size-4" />
             </span>
@@ -37,7 +37,7 @@ export function Road() {
         );
       })}
       {Array.from({ length: 22 }, (_, i) => (
-        <div key={i} data-cone className="cone" style={{ top: `${2 + rnd(i + 500) * 96}%`, left: `${3 + rnd(i + 900) * 94}%` }}>
+        <div key={i} data-cone className={`cone ${rnd(i + 900) > 0.5 ? "r" : "l"}`} style={{ top: `${2 + rnd(i + 500) * 96}%`, ["--f" as string]: 0.2 + rnd(i + 77) * 0.6 }}>
           <Cone />
         </div>
       ))}
@@ -57,22 +57,38 @@ export function Cone({ size = 26 }: { size?: number }) {
 }
 
 function Car({ color = "#ff6b35" }: { color?: string }) {
-  // top-down car, nose pointing DOWN
+  // top-down supercar, nose pointing DOWN
   return (
     <svg viewBox="0 0 34 58" width={CAR_W} height={CAR_H} className="drop-shadow-[3px_4px_0_rgba(29,27,46,0.35)]">
-      <rect x="1" y="9" width="5" height="11" rx="2" fill="#1d1b2e" />
-      <rect x="28" y="9" width="5" height="11" rx="2" fill="#1d1b2e" />
-      <rect x="1" y="38" width="5" height="11" rx="2" fill="#1d1b2e" />
-      <rect x="28" y="38" width="5" height="11" rx="2" fill="#1d1b2e" />
-      <rect x="4" y="2" width="26" height="54" rx="9" fill={color} stroke="#1d1b2e" strokeWidth="2" />
-      <rect x="8" y="34" width="18" height="10" rx="3" fill="#bae6fd" stroke="#1d1b2e" strokeWidth="1.5" />
-      <rect x="8" y="12" width="18" height="7" rx="3" fill="#bae6fd" stroke="#1d1b2e" strokeWidth="1.5" />
-      <rect x="9" y="21" width="16" height="11" rx="2" fill={color} stroke="#1d1b2e" strokeWidth="1.2" opacity="0.85" />
-      <rect x="15" y="2" width="4" height="54" fill="#fff" opacity="0.55" />
-      <circle cx="9" cy="53" r="2" fill="#fff59d" />
-      <circle cx="25" cy="53" r="2" fill="#fff59d" />
-      <rect x="7" y="3" width="5" height="2" rx="1" fill="#ef4444" />
-      <rect x="22" y="3" width="5" height="2" rx="1" fill="#ef4444" />
+      {/* wide tyres */}
+      <rect x="0" y="8" width="6" height="12" rx="2" fill="#1d1b2e" />
+      <rect x="28" y="8" width="6" height="12" rx="2" fill="#1d1b2e" />
+      <rect x="0" y="38" width="6" height="11" rx="2" fill="#1d1b2e" />
+      <rect x="28" y="38" width="6" height="11" rx="2" fill="#1d1b2e" />
+      {/* rear wing */}
+      <rect x="1.5" y="1" width="31" height="5" rx="1.5" fill="#1d1b2e" />
+      <rect x="9" y="4.5" width="2" height="4" fill="#1d1b2e" />
+      <rect x="23" y="4.5" width="2" height="4" fill="#1d1b2e" />
+      {/* wedge body */}
+      <path d="M8 6 Q17 4 26 6 L30 18 Q32.5 33 29 46 L21 56 Q17 57.5 13 56 L5 46 Q1.5 33 4 18 Z" fill={color} stroke="#1d1b2e" strokeWidth="2" strokeLinejoin="round" />
+      {/* side intakes */}
+      <path d="M5 24 L9 27 L9 33 L5 31 Z" fill="#1d1b2e" />
+      <path d="M29 24 L25 27 L25 33 L29 31 Z" fill="#1d1b2e" />
+      {/* engine vents */}
+      <rect x="12" y="9" width="10" height="1.4" rx=".7" fill="#1d1b2e" opacity=".6" />
+      <rect x="12" y="12" width="10" height="1.4" rx=".7" fill="#1d1b2e" opacity=".6" />
+      {/* canopy */}
+      <path d="M11.5 19 Q17 16 22.5 19 L22 36 Q17 40 12 36 Z" fill="#1e293b" stroke="#1d1b2e" strokeWidth="1.5" />
+      <path d="M13.5 22 Q16 20.5 18 21 L15 33 Q13.5 32 13.5 30 Z" fill="#bae6fd" opacity=".8" />
+      {/* racing stripes */}
+      <rect x="14.6" y="38" width="1.6" height="17" fill="#fff" opacity=".85" />
+      <rect x="17.8" y="38" width="1.6" height="17" fill="#fff" opacity=".85" />
+      <rect x="14.6" y="6" width="1.6" height="12" fill="#fff" opacity=".85" />
+      <rect x="17.8" y="6" width="1.6" height="12" fill="#fff" opacity=".85" />
+      {/* slim headlights + tail bar */}
+      <path d="M7 47 L12 52" stroke="#fff59d" strokeWidth="2" strokeLinecap="round" />
+      <path d="M27 47 L22 52" stroke="#fff59d" strokeWidth="2" strokeLinecap="round" />
+      <rect x="9" y="6.5" width="16" height="1.6" rx=".8" fill="#ef4444" />
     </svg>
   );
 }
@@ -109,7 +125,19 @@ export function Drive() {
     window.addEventListener("keyup", ku);
 
     // Smooth scrolling
-    const lenis = new Lenis({ lerp: 0.085, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 1.4 });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lenis = new Lenis({ lerp: reduced ? 1 : 0.085, smoothWheel: !reduced, wheelMultiplier: 0.9, touchMultiplier: 1.4 });
+
+    // cache DOM lookups — refreshed on resize and every couple of seconds (content mounts lazily)
+    let coinEls: HTMLElement[] = [], coneEls: HTMLElement[] = [], stopEls: HTMLElement[] = [];
+    const refresh = () => {
+      coinEls = [...document.querySelectorAll<HTMLElement>("[data-coin]")];
+      coneEls = [...document.querySelectorAll<HTMLElement>("[data-cone]")].filter((el) => el.offsetParent !== null);
+      stopEls = [...document.querySelectorAll<HTMLElement>("[data-stop]")];
+    };
+    refresh();
+    const refreshTimer = setInterval(refresh, 2000);
+    window.addEventListener("resize", refresh);
     (window as unknown as { __lenis: Lenis }).__lenis = lenis;
 
     let vy = 0, vx = 0, ox = 0, oy = 0, angle = 60, raf = 0, frame = 0;
@@ -191,7 +219,8 @@ export function Drive() {
       // coins
       if (car) {
         const cr = car.getBoundingClientRect();
-        document.querySelectorAll<HTMLElement>("[data-coin]:not(.got)").forEach((el) => {
+        if (frame % 2 === 0) coinEls.forEach((el) => {
+          if (el.classList.contains("got")) return;
           const r = el.querySelector(".coin-face")!.getBoundingClientRect();
           if (r.right > cr.left + 4 && r.left < cr.right - 4 && r.bottom > cr.top + 4 && r.top < cr.bottom - 4) {
             el.classList.add("got");
@@ -204,7 +233,8 @@ export function Drive() {
         });
 
         // traffic cones: knock them flying, they pop back later
-        document.querySelectorAll<HTMLElement>("[data-cone]:not(.hit)").forEach((el) => {
+        if (frame % 2 === 1) coneEls.forEach((el) => {
+          if (el.classList.contains("hit")) return;
           const r = el.getBoundingClientRect();
           if (r.right > cr.left && r.left < cr.right && r.bottom > cr.top && r.top < cr.bottom) {
             el.classList.add("hit");
@@ -221,7 +251,7 @@ export function Drive() {
         // checkpoints
         const carMid = cr.top + cr.height / 2;
         let name = "Start";
-        document.querySelectorAll<HTMLElement>("[data-stop]").forEach((s) => {
+        stopEls.forEach((s) => {
           if (s.getBoundingClientRect().top < carMid) name = s.dataset.stop!;
         });
         if (name !== curStop) {
@@ -244,6 +274,8 @@ export function Drive() {
 
     return () => {
       cancelAnimationFrame(raf);
+      clearInterval(refreshTimer);
+      window.removeEventListener("resize", refresh);
       lenis.destroy();
       window.removeEventListener("keydown", kd);
       window.removeEventListener("keyup", ku);
@@ -285,7 +317,7 @@ export function Drive() {
       </div>
 
       {toast && (
-        <div key={toast} className="toast fixed left-1/2 top-20 z-50 -translate-x-1/2 rounded-full border-2 border-ink bg-[#ffc93c] px-5 py-2 text-sm font-semibold shadow-[4px_4px_0_var(--ink)]">
+        <div key={toast} className="toast fixed bottom-24 left-1/2 z-50 max-w-[calc(100vw-2rem)] -translate-x-1/2 truncate whitespace-nowrap rounded-full border-2 border-ink bg-[#ffc93c] px-4 py-1.5 text-xs font-semibold shadow-[3px_3px_0_var(--ink)] sm:px-5 sm:py-2 sm:text-sm md:bottom-auto md:top-20">
           {toast}
           {got === coinSkills.length && (
             <a href={`mailto:${profile.email}`} className="ml-2 underline">Say hi →</a>

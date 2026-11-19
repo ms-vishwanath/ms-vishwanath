@@ -53,11 +53,11 @@ body { overflow-x: clip; background: #fff6d6; color: var(--ink); -webkit-font-sm
 .road-asphalt > i, .road::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; margin-left: -2px;
   background: repeating-linear-gradient(#ffc93c 0 26px, transparent 26px 52px); }
 
-.coin { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.coin { position: absolute; transform: translateX(-50%); --gx: max(13px, calc((100% - 72rem) / 2 * var(--f))); display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .coin-face { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: #fff;
   border: 2px solid var(--ink); box-shadow: 0 0 0 3px #ffc93c, 2px 3px 0 3px var(--ink); animation: coin 1.6s ease-in-out infinite; }
 .coin-label { font-size: 9px; font-weight: 700; color: #fff; background: var(--ink); border-radius: 4px; padding: 1px 5px; white-space: nowrap; }
-@media (max-width: 767px) { .coin-face { width: 30px; height: 30px; } .coin-label { display: none; } }
+@media (max-width: 1279px) { .coin-label { display: none; } }
 @keyframes coin { 50% { transform: translateY(-4px) scale(1.06); } }
 
 .gate { display: none; }
@@ -138,7 +138,7 @@ html.lenis, html.lenis body { height: auto; }
 .map-ping { animation: mapping 1.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes mapping { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.6); opacity: 0; } }
 .map-pin { transition: filter .2s; } .map-pin:hover { filter: drop-shadow(0 6px 0 rgba(29,27,46,.35)); }
-.cone { position: absolute; transform-origin: 50% 90%; filter: drop-shadow(2px 3px 0 rgba(29,27,46,.25)); }
+.cone { position: absolute; --gx: max(13px, calc((100% - 72rem) / 2 * var(--f))); translate: -50% 0; transform-origin: 50% 90%; filter: drop-shadow(2px 3px 0 rgba(29,27,46,.25)); }
 .pg { display: inline-grid; place-items: center; min-width: 42px; height: 42px; padding: 0 10px; border-radius: 12px; background: #fff;
   border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); font-weight: 700; font-size: 14px; transition: transform .15s, background .2s; }
 .pg:hover { background: #ffc93c; transform: translateY(-2px); }
@@ -151,3 +151,17 @@ html.loading .hud, html.loading [data-car], html.loading .coin, html.loading .co
 .ld-puff { animation: puff .6s ease-out infinite; }
 @keyframes puff { from { transform: translate(0,-50%) scale(.6); opacity: .7; } to { transform: translate(-22px,-50%) scale(1.8); opacity: 0; } }
 .ld-car { transition: left .25s ease-out; }
+
+/* Responsive + a11y polish */
+@media (max-width: 767px) {
+  .cone { display: none; }
+  .coin-face { width: 26px; height: 26px; }
+  .coin-face svg { width: 13px; height: 13px; }
+}
+:focus-visible { outline: 3px solid #3d5afe; outline-offset: 3px; border-radius: 8px; }
+
+/* coins & cones live in the side gutters, never over content */
+.coin.l, .cone.l { left: var(--gx); }
+.coin.r, .cone.r { left: calc(100% - var(--gx)); }
+@media (max-width: 639px) { .wrap { padding-left: 1.85rem; padding-right: 1.85rem; } .coin-face { width: 22px !important; height: 22px !important; box-shadow: 0 0 0 2px #ffc93c, 1px 2px 0 2px var(--ink); } .coin-face svg { width: 11px !important; height: 11px !important; } }
+@media (min-width: 640px) and (max-width: 1279px) { .coin-face { width: 26px; height: 26px; } .coin-face svg { width: 13px; height: 13px; } }

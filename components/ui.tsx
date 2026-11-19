@@ -36,7 +36,7 @@ export function Section({
   id, index, label, title, lead, art, tint, accent, children, className,
 }: { id: string; index: string; label: string; title: string; lead?: string; art?: ReactNode; tint: string; accent: string; children: ReactNode; className?: string }) {
   return (
-    <section id={id} data-stop={label} style={{ background: tint, ["--accent" as string]: accent }} className={cn("relative py-24 sm:py-32", className)}>
+    <section id={id} data-stop={label} style={{ background: tint, ["--accent" as string]: accent }} className={cn("relative py-20 sm:py-28 lg:py-32", className)}>
       <Gate index={index} label={label} accent={accent} />
       <div className="road-pad">
         <div className="wrap">
@@ -57,7 +57,7 @@ export function Section({
               )}
             </div>
             {art && (
-              <Reveal delay={0.1} className="mx-auto w-full max-w-md lg:col-span-5">
+              <Reveal delay={0.1} className="mx-auto w-full max-w-[18rem] sm:max-w-sm lg:col-span-5 lg:max-w-md">
                 {art}
               </Reveal>
             )}
@@ -86,8 +86,4 @@ export function Tag({ children }: { children: string }) {
       <TechIcon name={children} className="size-3.5" /> {children}
     </span>
   );
-}
-
-export function Card({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn("rounded-2xl border-2 border-ink bg-white shadow-[5px_5px_0_var(--ink)]", className)}>{children}</div>;
 }
