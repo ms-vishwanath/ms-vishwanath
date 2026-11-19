@@ -8,8 +8,9 @@ const primaryFont = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "MS-VISHWANATH",
-  description: "3D DIMENSIONAL PORTFOLIO OF AN FULL STACK DEVELOPER",
+  title: "M. S. Vishwanath | Software Developer & Full Stack Engineer",
+  description:
+    "Portfolio of M. S. Vishwanath - Full Stack Developer with experience in scalable web applications, microservices architecture, AI-powered tools, and distributed systems.",
 };
 
 export default function RootLayout({
@@ -18,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light" style={{ colorScheme: "light" }}>
       <body
-        className={`antialiased ${primaryFont.className}`}
+        className={`bg-white text-slate-900 antialiased ${primaryFont.className}`}
       >
         {children}
               <GoogleAnalytics gaId="G-XYZ" />
