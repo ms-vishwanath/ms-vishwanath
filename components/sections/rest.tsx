@@ -5,7 +5,7 @@ import { TowerArt, TeamArt, GiraffeArt, FinishArt } from "@/components/illustrat
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import { FaLinkedinIn } from "react-icons/fa6";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import type { MouseEvent, ReactNode } from "react";
 import { aiWork, leadership, profile, venture } from "@/lib/profile";
 import { Gate, Reveal, Section, SplitText } from "@/components/ui";
@@ -108,6 +108,7 @@ export function Venture() {
 export function Contact() {
   const socials = [
     { label: "Email", value: profile.email, href: `mailto:${profile.email}`, icon: Mail, c: "#ffc93c" },
+    { label: "WhatsApp", value: "Chat with me", href: profile.whatsapp, icon: FaWhatsapp, c: "#86efac" },
     { label: "LinkedIn", value: "in/msvishwanath", href: profile.linkedin, icon: FaLinkedinIn, c: "#7dd3fc" },
     { label: "GitHub", value: profile.githubHandle, href: profile.github, icon: SiGithub, c: "#f9a8d4" },
   ];
@@ -134,7 +135,7 @@ export function Contact() {
             <Reveal className="mx-auto w-full max-w-md lg:col-span-5"><FinishArt /></Reveal>
           </div>
 
-          <div className="mt-16 grid gap-5 sm:grid-cols-3">
+          <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {socials.map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{ background: s.c }} className="group flex items-center justify-between rounded-2xl border-2 border-ink p-6 shadow-[5px_5px_0_var(--ink)] transition-transform hover:-translate-y-1">
                 <span className="flex items-center gap-3">

@@ -1,81 +1,90 @@
 "use client";
 
-import { GarageArt } from "@/components/illustrations";
-
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { GarageArt } from "@/components/illustrations";
 import { projects, type Status } from "@/lib/profile";
 import { Reveal, Section, Tag } from "@/components/ui";
+import AllProjects from "./all-projects";
 
 const filters: ("All" | Status)[] = ["All", "Contributed", "Built", "In progress", "Concept", "Experimental"];
 
-const dot: Record<Status, string> = {
-  Contributed: "bg-[#3d5afe]",
-  Built: "bg-[#22c55e]",
-  "In progress": "bg-[#f59e0b] animate-pulse",
-  Concept: "bg-[#ec4899]",
-  Experimental: "bg-[#8b5cf6]",
+const statusColor: Record<Status, string> = {
+  Contributed: "#3d5afe",
+  Built: "#22c55e",
+  "In progress": "#f59e0b",
+  Concept: "#ec4899",
+  Experimental: "#8b5cf6",
 };
+
+const bay = ["#ffc93c", "#7dd3fc", "#f9a8d4", "#86efac", "#c4b5fd", "#fdba74", "#a5f3fc", "#fde68a"];
 
 export default function Work() {
   const [f, setF] = useState<(typeof filters)[number]>("All");
-  const [open, setOpen] = useState<string | null>(projects[0].name);
   const list = projects.filter((p) => f === "All" || p.status === f);
 
   return (
-    <Section id="work" index="03" label="Garage" tint="#ffe4f1" accent="#ec4899" art={<GarageArt />} title="Selected work — shipped, shaping and experimental." lead="Each project is labelled honestly: what I contributed to, what I built, what's in progress and what's still a concept.">
-      <Reveal className="mb-10 flex flex-wrap gap-2">
-        {filters.map((x) => (
-          <button key={x} onClick={() => setF(x)} className={`mono rounded-full border px-3 py-1 text-xs transition-colors ${f === x ? "border-ink bg-ink text-white" : "border-ink text-ink/65 hover:text-fg"}`}>
-            {x}
-          </button>
-        ))}
+    <Section id="work" index="03" label="Garage" tint="#ffe4f1" accent="#ec4899" art={<GarageArt />} title="The garage — 70+ projects built, shipped and shaped." lead="Featured builds first, each parked in its own bay and labelled honestly. Below them is the full lot of every live project I've shipped.">
+      <Reveal className="mb-8 flex flex-wrap gap-2">
+        {filters.map((x) => {
+          const n = x === "All" ? projects.length : projects.filter((p) => p.status === x).length;
+          return (
+            <button key={x} onClick={() => setF(x)} className={`inline-flex items-center gap-2 rounded-full border-2 border-ink px-3 py-1 text-xs font-semibold transition-all ${f === x ? "bg-ink text-white" : "bg-white shadow-[2px_2px_0_var(--ink)] hover:-translate-y-0.5"}`}>
+              {x !== "All" && <span className="size-2 rounded-full" style={{ background: statusColor[x] }} />}
+              {x} <span className="opacity-50">{n}</span>
+            </button>
+          );
+        })}
       </Reveal>
 
-      <motion.ul layout className="overflow-hidden rounded-2xl border-2 border-ink bg-white px-5 shadow-[6px_6px_0_var(--ink)] sm:px-8">
-        <AnimatePresence initial={false}>
+      <motion.div layout className="grid gap-6 md:grid-cols-2">
+        <AnimatePresence mode="popLayout">
           {list.map((p, i) => {
-            const isOpen = open === p.name;
+            const n = projects.indexOf(p);
             return (
-              <motion.li layout key={p.name} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="border-b border-ink">
-                <button onClick={() => setOpen(isOpen ? null : p.name)} className="group grid w-full grid-cols-12 items-center gap-4 py-7 text-left">
-                  <span className="mono col-span-1 text-xs text-ink/65">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="col-span-11 text-2xl font-medium tracking-tight transition-transform duration-500 group-hover:translate-x-2 sm:col-span-5 sm:text-4xl">{p.name}</span>
-                  <span className="col-span-6 col-start-2 text-sm text-ink/65 sm:col-span-3 sm:col-start-auto">{p.kind}</span>
-                  <span className="mono col-span-4 flex items-center gap-2 text-xs text-ink/65 sm:col-span-2">
-                    <span className={`size-2 rounded-full ${dot[p.status]}`} /> {p.status}
+              <motion.article
+                layout
+                key={p.name}
+                initial={{ opacity: 0, y: 30, rotate: -1 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 160, damping: 20, delay: (i % 2) * 0.08 }}
+                whileHover={{ y: -6 }}
+                className="group flex flex-col overflow-hidden rounded-2xl border-2 border-ink bg-white shadow-[6px_6px_0_var(--ink)]"
+              >
+                {/* bay door — rolls up on hover */}
+                <div className="relative flex items-center justify-between overflow-hidden border-b-2 border-ink px-5 py-3" style={{ background: bay[n % bay.length] }}>
+                  <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0_9px,rgba(29,27,46,.14)_9px_11px)] transition-transform duration-500 group-hover:-translate-y-full" />
+                  <span className="mono relative text-xs font-bold">BAY {String(n + 1).padStart(2, "0")}</span>
+                  <span className="relative inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-white px-2.5 py-0.5 text-[11px] font-bold">
+                    <span className="size-2 rounded-full" style={{ background: statusColor[p.status] }} /> {p.status}
                   </span>
-                  <Plus className={`col-span-1 size-5 justify-self-end transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`} />
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden">
-                      <div className="grid gap-8 pb-10 sm:grid-cols-12">
-                        <div className="sm:col-span-5 sm:col-start-2">
-                          <p className="text-lg text-pretty">{p.summary}</p>
-                          <div className="mt-6 flex flex-wrap gap-2">
-                            {p.stack.map((s) => (
-                              <Tag key={s}>{s}</Tag>
-                            ))}
-                          </div>
-                        </div>
-                        <ul className="space-y-3 sm:col-span-5 sm:col-start-8">
-                          {p.points.map((pt) => (
-                            <li key={pt} className="flex gap-3 text-sm text-ink/65">
-                              <span className="mt-1.5 size-2 shrink-0 rounded-full bg-[var(--accent)]" /> {pt}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.li>
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">{p.name}</h3>
+                  <p className="mono mt-1 text-xs font-semibold text-ink/55">{p.kind}</p>
+                  <p className="mt-4 text-pretty text-ink/80">{p.summary}</p>
+                  <ul className="mt-4 space-y-2">
+                    {p.points.map((pt) => (
+                      <li key={pt} className="flex gap-2.5 text-sm text-ink/75">
+                        <span className="mt-1.5 size-2 shrink-0 rounded-full" style={{ background: statusColor[p.status] }} /> {pt}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto flex flex-wrap gap-1.5 pt-6">
+                    {p.stack.map((s) => (
+                      <Tag key={s}>{s}</Tag>
+                    ))}
+                  </div>
+                </div>
+              </motion.article>
             );
           })}
         </AnimatePresence>
-      </motion.ul>
+      </motion.div>
+
+      <AllProjects />
     </Section>
   );
 }

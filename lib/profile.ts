@@ -8,6 +8,7 @@ export const profile = {
   roles: ["Full Stack AI Developer", "Software Architect", "Freelancer", "Trainer", "Product Builder"],
   location: "Coimbatore, Tamil Nadu, India",
   email: "msvishwanath@outlook.com",
+  whatsapp: "https://wa.me/919790006831?text=Hi%20Vishwanath%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.",
   linkedin: "https://linkedin.com/in/msvishwanath",
   github: "https://github.com/ms-vishwanath",
   githubHandle: "ms-vishwanath",

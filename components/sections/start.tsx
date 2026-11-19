@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { profile } from "@/lib/profile";
 import { StartArt } from "@/components/illustrations";
 import { Gate, SplitText } from "@/components/ui";
@@ -32,22 +33,35 @@ export default function Start() {
       </div>
 
       <div className="road-pad relative">
-        <div className="wrap flex min-h-svh flex-col justify-center pb-20 pt-28">
+        <div className="wrap flex min-h-svh flex-col justify-center pb-20 pt-24">
           <div className="grid items-center gap-10 lg:grid-cols-12">
             <div className="relative z-10 lg:col-span-7">
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mono inline-flex flex-wrap items-center gap-2 rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-semibold shadow-[3px_3px_0_var(--ink)]">
-                <span className="size-2 animate-pulse rounded-full bg-[#22c55e]" /> Vishwanath · open for freelance, builds & training
+                <span className="size-2 animate-pulse rounded-full bg-[#22c55e]" /> Full Stack AI Developer · open for freelance & training
               </motion.p>
-              <h1 className="mt-8 text-[clamp(2.6rem,7vw,6.2rem)] font-semibold leading-[0.95] tracking-tight">
-                <SplitText text="Take a drive" delay={0.15} />
-                <br />
-                <SplitText text="through what" delay={0.3} />{" "}
-                <span className="relative inline-block">
-                  <span className="relative z-10"><SplitText text="I build." delay={0.45} /></span>
-                  <motion.span className="absolute inset-x-0 bottom-[0.12em] z-0 h-[0.32em] origin-left rounded bg-[#ff6b35]/70" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.9, duration: 0.6 }} />
+              <p className="mt-7 text-xl font-semibold text-ink/70 sm:text-2xl">Hey, I&apos;m</p>
+              <h1 className="relative -ml-1 whitespace-nowrap text-[clamp(3.4rem,8.2vw,8.4rem)] font-bold leading-[0.9] tracking-tighter">
+                <span className="relative z-10">
+                  {"Vishwanath".split("").map((ch, i) => (
+                    <motion.span
+                      key={i}
+                      className="inline-block"
+                      style={{ color: ["#1d1b2e", "#ff6b35", "#1d1b2e", "#3d5afe", "#1d1b2e", "#ec4899", "#1d1b2e", "#14b8a6", "#1d1b2e", "#f59e0b"][i] }}
+                      initial={{ y: "100%", opacity: 0, rotate: -12 }}
+                      animate={{ y: 0, opacity: 1, rotate: 0 }}
+                      whileHover={{ y: -14, rotate: i % 2 ? 8 : -8, transition: { type: "spring", stiffness: 500 } }}
+                      transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.15 + i * 0.05 }}
+                    >
+                      {ch}
+                    </motion.span>
+                  ))}
                 </span>
+                <motion.span className="absolute bottom-[0.06em] left-1 z-0 h-[0.18em] w-[calc(100%-0.2em)] origin-left rounded-full bg-[#ffc93c]" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.8, duration: 0.6, ease: [0.22, 1, 0.36, 1] }} />
               </h1>
-              <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="mt-7 max-w-xl text-lg text-ink/75 text-pretty">
+              <h2 className="mt-5 text-[clamp(1.6rem,3.4vw,2.8rem)] font-semibold leading-tight tracking-tight">
+                <SplitText text="Take a drive through what I build." delay={0.7} />
+              </h2>
+              <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="mt-5 max-w-xl text-lg text-ink/75 text-pretty">
                 Full Stack AI Developer, architect, freelancer and trainer. I turn ideas into intelligent, scalable products. Grab the wheel and collect my stack on the road.
               </motion.p>
 
@@ -55,8 +69,8 @@ export default function Start() {
                 <a href="#about" className="group inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#ff6b35] px-6 py-3 text-sm font-semibold text-white shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5">
                   Start driving <ArrowDown className="size-4 transition-transform group-hover:translate-y-0.5" />
                 </a>
-                <a href={`mailto:${profile.email}`} className="group inline-flex items-center gap-2 rounded-full border-2 border-ink bg-white px-6 py-3 text-sm font-semibold shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5">
-                  Hire me <ArrowUpRight className="size-4" />
+                <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#25d366] px-6 py-3 text-sm font-semibold shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5">
+                  <FaWhatsapp className="size-4" /> Hire me <ArrowUpRight className="size-4" />
                 </a>
               </motion.div>
 

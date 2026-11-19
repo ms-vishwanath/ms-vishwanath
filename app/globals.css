@@ -138,3 +138,4 @@ html.lenis, html.lenis body { height: auto; }
 .map-ping { animation: mapping 1.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes mapping { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.6); opacity: 0; } }
 .map-pin { transition: filter .2s; } .map-pin:hover { filter: drop-shadow(0 6px 0 rgba(29,27,46,.35)); }
+.cone { position: absolute; transform-origin: 50% 90%; filter: drop-shadow(2px 3px 0 rgba(29,27,46,.25)); }

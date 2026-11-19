@@ -73,10 +73,9 @@ export function StartArt() {
       <circle cx={P(7.6, 4.2, 5.8).split(",")[0]} cy={P(7.6, 4.2, 5.8).split(",")[1]} r={4} fill="#ff4d4d" className="ill-blink" />
       <circle cx={P(7.6, 4.2, 5.1).split(",")[0]} cy={P(7.6, 4.2, 5.1).split(",")[1]} r={4} fill="#ffc93c" className="ill-blink d1" />
       <circle cx={P(7.6, 4.2, 4.4).split(",")[0]} cy={P(7.6, 4.2, 4.4).split(",")[1]} r={4} fill="#22c55e" className="ill-blink d2" />
-      <g className="ill-bob">
-        <Box x={3} y={2} z={0.1} w={2} d={3} h={0.8} c="#ff6b35" />
-        <Box x={3.2} y={2.6} z={0.9} w={1.6} d={1.4} h={0.6} c="#7dd3fc" />
-      </g>
+      {/* the real car parks here at scroll 0 */}
+      <circle data-car-start cx={P(4, 3.2, 0.1).split(",")[0]} cy={P(4, 3.2, 0.1).split(",")[1]} r={1} fill="none" />
+      <ellipse cx={P(4, 3.2, 0).split(",")[0]} cy={P(4, 3.2, 0).split(",")[1]} rx={26} ry={12} fill="#1d1b2e" opacity={0.18} className="ill-bob" />
       <Tree x={9} y={8} />
       <Tree x={10} y={1} c="#16a34a" />
       <Tree x={-0.5} y={9} />
@@ -230,6 +229,8 @@ export function FinishArt() {
       <Box x={1.4} y={5.4} w={0.3} d={0.3} h={5} c="#94a3b8" />
       <Box x={6.3} y={5.4} w={0.3} d={0.3} h={5} c="#94a3b8" />
       <Box x={1.4} y={5.4} z={5} w={5.2} d={0.3} h={1} c="#ff6b35" />
+      {/* the real car parks here at the end */}
+      <circle data-car-end cx={P(4, 8.5, 0.1).split(",")[0]} cy={P(4, 8.5, 0.1).split(",")[1]} r={1} fill="none" />
       <Box x={9} y={4} w={0.3} d={0.3} h={2.5} c="#64748b" />
       <Box x={8.4} y={3.6} z={2.5} w={1.6} d={1.1} h={1.1} c="#3d5afe" />
       <g className="ill-wave" style={{ transformBox: "fill-box", transformOrigin: "left bottom" }}>

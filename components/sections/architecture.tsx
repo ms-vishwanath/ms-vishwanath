@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Reveal, Section } from "@/components/ui";
 
 // Hand-built isometric projection of a microservices platform.
-const S = 26;
+const S = 24;
 const C = Math.cos(Math.PI / 6);
 const iso = (x: number, y: number, z: number) => [(x - y) * C * S, (x + y) * 0.5 * S - z * S] as const;
 const pts = (a: (readonly [number, number])[]) => a.map((p) => p.join(",")).join(" ");
@@ -14,23 +14,26 @@ const pts = (a: (readonly [number, number])[]) => a.map((p) => p.join(",")).join
 type Node = { id: string; label: string; x: number; layer: number };
 
 const layers = [
-  { z: 0, name: "Data", desc: "PostgreSQL, MongoDB, Redis cache and S3 object storage — each service owns its data." },
-  { z: 3.2, name: "Services", desc: "~50 domain microservices — auth, wallet, payments, ratings, coupons, delivery — talking over gRPC and RabbitMQ events." },
-  { z: 6.4, name: "BFF", desc: "Backend-for-Frontend layers shape GraphQL/REST APIs per client, with shared pagination, filtering, sorting and power-search standards." },
-  { z: 9.6, name: "Clients", desc: "Customer, seller, delivery and admin apps — each with its own needs and release cadence." },
+  { z: 0, name: "Data", desc: "PostgreSQL, MongoDB, Redis, object storage (S3) and queues — the right store for each job, owned per service." },
+  { z: 2.7, name: "Services", desc: "Domain services in Node.js, FastAPI or Django, AI/LLM services and background workers, talking over gRPC and RabbitMQ events." },
+  { z: 5.4, name: "API", desc: "REST, GraphQL, gRPC and Socket.io — Backend-for-Frontend layers with consistent pagination, filtering, sorting and search standards." },
+  { z: 8.1, name: "Edge", desc: "Nginx, Cloudflare and the auth layer — JWT/OAuth, RBAC, rate limiting and CORS before anything reaches a service." },
+  { z: 10.8, name: "Clients", desc: "Next.js web apps, React Native / Expo mobile, Tauri desktop and admin dashboards — each with its own needs and release cadence." },
 ];
 
 const nodes: Node[] = [
-  ...["Postgres", "Mongo", "Redis", "S3"].map((l, i) => ({ id: "d" + i, label: l, x: 1 + i * 2.2, layer: 0 })),
-  ...["Auth", "Wallet", "Pay", "Rating", "Coupon"].map((l, i) => ({ id: "s" + i, label: l, x: 0.6 + i * 1.8, layer: 1 })),
-  ...["Customer BFF", "Partner BFF", "Admin BFF"].map((l, i) => ({ id: "b" + i, label: l, x: 1.4 + i * 2.8, layer: 2 })),
-  ...["Customer", "Seller", "Delivery", "Admin"].map((l, i) => ({ id: "c" + i, label: l, x: 1 + i * 2.2, layer: 3 })),
+  ...["Postgres", "Mongo", "Redis", "S3", "Queue"].map((l, i) => ({ id: "d" + i, label: l, x: 0.6 + i * 1.8, layer: 0 })),
+  ...["Node.js", "FastAPI", "Django", "AI / LLM", "Workers"].map((l, i) => ({ id: "s" + i, label: l, x: 0.6 + i * 1.8, layer: 1 })),
+  ...["REST", "GraphQL", "gRPC", "Sockets"].map((l, i) => ({ id: "a" + i, label: l, x: 1 + i * 2.2, layer: 2 })),
+  ...["Nginx", "CDN", "Auth"].map((l, i) => ({ id: "e" + i, label: l, x: 1.4 + i * 2.8, layer: 3 })),
+  ...["Web", "Mobile", "Desktop", "Admin"].map((l, i) => ({ id: "c" + i, label: l, x: 1 + i * 2.2, layer: 4 })),
 ];
 
 const links: [string, string][] = [
-  ["c0", "b0"], ["c1", "b1"], ["c2", "b1"], ["c3", "b2"],
-  ["b0", "s0"], ["b0", "s1"], ["b0", "s2"], ["b1", "s3"], ["b1", "s4"], ["b2", "s0"], ["b2", "s2"],
-  ["s0", "d0"], ["s1", "d0"], ["s2", "d1"], ["s3", "d2"], ["s4", "d1"], ["s1", "d2"], ["s2", "d3"],
+  ["c0", "e1"], ["c1", "e0"], ["c2", "e0"], ["c3", "e2"], ["c0", "e2"],
+  ["e0", "a0"], ["e0", "a1"], ["e1", "a0"], ["e2", "a2"], ["e2", "a3"],
+  ["a0", "s0"], ["a1", "s0"], ["a1", "s3"], ["a2", "s1"], ["a2", "s2"], ["a3", "s0"],
+  ["s0", "d0"], ["s0", "d2"], ["s1", "d1"], ["s2", "d0"], ["s3", "d3"], ["s4", "d4"], ["s3", "d2"],
 ];
 
 const Y = 2; // depth position of nodes on each plate
@@ -61,10 +64,10 @@ export default function Architecture() {
   const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
 
   return (
-    <Section id="architecture" index="04" label="Service city" tint="#efeaff" accent="#8b5cf6" art={<CityArt />} title="I think in systems, not screens." lead="A simplified view of the kind of platform I work on: around 50 microservices behind Backend-for-Frontend layers, connected by gRPC and RabbitMQ events. Hover a layer.">
+    <Section id="architecture" index="04" label="Service city" tint="#efeaff" accent="#8b5cf6" art={<CityArt />} title="I think in systems, not screens." lead="How I structure products end to end: clients, an edge and auth layer, APIs shaped for each client, services and AI workers, and the data underneath. It's the blueprint I adapt for every build, from small SaaS to large microservice platforms. Hover a layer.">
       <div className="grid items-center gap-12 lg:grid-cols-12">
         <Reveal className="lg:col-span-8">
-          <svg viewBox="-280 -290 560 470" className="w-full">
+          <svg viewBox="-280 -330 560 510" className="w-full">
             {/* plates */}
             {layers.map((L, i) => (
               <g key={L.name} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} className="cursor-pointer">
@@ -100,8 +103,8 @@ export default function Architecture() {
             ))}
             {/* message bus */}
             {(() => {
-              const [x1, y1] = iso(0, D + 0.4, 3.2);
-              const [x2, y2] = iso(W, D + 0.4, 3.2);
+              const [x1, y1] = iso(0, D + 0.4, 2.7);
+              const [x2, y2] = iso(W, D + 0.4, 2.7);
               return (
                 <g opacity={hover === null || hover === 1 ? 1 : 0.2}>
                   <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--fg)" strokeWidth={1.2} strokeDasharray="6 4" className="flow-fast" />
@@ -116,7 +119,7 @@ export default function Architecture() {
           {[...layers].reverse().map((L) => {
             const i = layers.indexOf(L);
             return (
-              <Reveal key={L.name} delay={(3 - i) * 0.06}>
+              <Reveal key={L.name} delay={(layers.length - 1 - i) * 0.06}>
                 <div onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} className={`cursor-default rounded-xl border p-5 transition-colors duration-300 ${hover === i ? "border-ink bg-white shadow-[4px_4px_0_var(--ink)]" : "border-ink/30 bg-white/50"}`}>
                   <p className="mono text-xs text-ink/65">L{i}</p>
                   <h4 className="mt-1 text-lg font-medium">{L.name}</h4>

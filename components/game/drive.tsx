@@ -14,23 +14,45 @@ const ACC = 1.1;
 const MAX = 26;
 const FRICTION = 0.92;
 
-/** Skill coins scattered over the whole page, left to right. */
+// deterministic pseudo-random so server and client render identically
+const rnd = (n: number) => {
+  const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
+};
+
+/** Skill coins and traffic cones scattered over the whole page. */
 export function Road() {
   return (
     <div className="pointer-events-none absolute inset-0 z-30" aria-hidden>
       {coinSkills.map((s, i) => {
-        const top = 4 + (i / coinSkills.length) * 93;
-        const left = [6, 30, 52, 74, 94, 64, 18, 86][i % 8];
+        const top = 3 + (i / coinSkills.length) * 94 + (rnd(i) - 0.5) * 2.2;
+        const left = 4 + rnd(i + 99) * 92;
         return (
           <div key={s} data-coin={s} className="coin" style={{ top: `${top}%`, left: `${left}%` }}>
-            <span className="coin-face">
+            <span className="coin-face" style={{ animationDelay: `${-rnd(i + 7) * 1.6}s` }}>
               <TechIcon name={s} className="size-4" />
             </span>
             <span className="coin-label mono">{s.replace(" (exploring)", "")}</span>
           </div>
         );
       })}
+      {Array.from({ length: 22 }, (_, i) => (
+        <div key={i} data-cone className="cone" style={{ top: `${2 + rnd(i + 500) * 96}%`, left: `${3 + rnd(i + 900) * 94}%` }}>
+          <Cone />
+        </div>
+      ))}
     </div>
+  );
+}
+
+export function Cone({ size = 26 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 26 30" width={size} height={size * 1.15}>
+      <rect x="2" y="25" width="22" height="4" rx="1.5" fill="#ff6b1a" stroke="#1d1b2e" strokeWidth="1.6" />
+      <path d="M9 4 L17 4 L22 25 L4 25 Z" fill="#ff7a1a" stroke="#1d1b2e" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M7.6 11 L18.4 11 L19.6 16 L6.4 16 Z" fill="#fff" />
+      <rect x="9.5" y="2" width="7" height="3" rx="1.5" fill="#ff7a1a" stroke="#1d1b2e" strokeWidth="1.4" />
+    </svg>
   );
 }
 
@@ -90,7 +112,7 @@ export function Drive() {
     const lenis = new Lenis({ lerp: 0.085, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 1.4 });
     (window as unknown as { __lenis: Lenis }).__lenis = lenis;
 
-    let vy = 0, vx = 0, ox = 0, oy = 0, angle = -90, raf = 0, frame = 0;
+    let vy = 0, vx = 0, ox = 0, oy = 0, angle = 60, raf = 0, frame = 0;
     let px = -1, py = -1;
     const collected = new Set<string>();
     let curStop = "";
@@ -119,9 +141,25 @@ export function Drive() {
       vy = Math.max(-MAX, Math.min(MAX, vy));
       const steering = k.left || k.right || k.up || k.down;
 
-      const [bx, by] = path(t, W, H);
+      let [bx, by] = path(t, W, H);
       ox += vx;
-      oy += vy;
+      // up/down keys drive the page directly — fast in both directions
+      if (Math.abs(vy) > 0.4) lenis.scrollTo(lenis.scroll + vy * 1.9, { immediate: true });
+      oy += vy * 0.12;
+
+      // park on the start-line illustration at the top, on the finish line at the bottom
+      const anchor = (sel: string) => {
+        const el = document.querySelector(sel);
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return [r.left + r.width / 2, r.top + r.height / 2] as const;
+      };
+      const smooth = (v: number) => { const c = Math.min(1, Math.max(0, v)); return c * c * (3 - 2 * c); };
+      const maxScroll = document.documentElement.scrollHeight - H;
+      const ws = smooth(1 - lenis.scroll / (H * 0.85));
+      const we = smooth((lenis.scroll - (maxScroll - H * 0.9)) / (H * 0.8));
+      if (ws > 0.001) { const a = anchor("[data-car-start]"); if (a) { bx += (a[0] - bx) * ws; by += (a[1] - by) * ws; ox *= 1 - ws * 0.2; oy *= 1 - ws * 0.2; } }
+      if (we > 0.001) { const a = anchor("[data-car-end]"); if (a) { bx += (a[0] - bx) * we; by += (a[1] - by) * we; ox *= 1 - we * 0.2; oy *= 1 - we * 0.2; } }
       // without input, drift back onto the scroll path
       if (!steering) { ox *= 0.985; oy *= 0.985; }
 
@@ -130,8 +168,8 @@ export function Drive() {
       if (tx < minX) { ox += minX - tx; tx = minX; }
       if (tx > maxX) { ox -= tx - maxX; tx = maxX; }
       // driving into the bottom/top edge scrolls the page
-      if (ty > maxY) { if (k.down) lenis.scrollTo(lenis.targetScroll + Math.max(vy, 6), { immediate: false, lerp: 0.12 }); oy -= ty - maxY; ty = maxY; }
-      if (ty < minY) { if (k.up) lenis.scrollTo(lenis.targetScroll + Math.min(vy, -6), { immediate: false, lerp: 0.12 }); oy += minY - ty; ty = minY; }
+      if (ty > maxY && ws < 0.5 && we < 0.5) { oy -= ty - maxY; ty = maxY; }
+      if (ty < minY) { oy += minY - ty; ty = minY; }
 
       if (px < 0) { px = tx; py = ty; }
       const nx = px + (tx - px) * 0.14;
@@ -162,6 +200,21 @@ export function Drive() {
             gsap.fromTo(el, { scale: 1 }, { scale: 1.8, opacity: 0, y: -30, duration: 0.5, ease: "back.out(3)" });
             gsap.fromTo("#hud-coins", { scale: 1.35 }, { scale: 1, duration: 0.4, ease: "elastic.out(1,0.4)" });
             if (collected.size === coinSkills.length) setToast("All skills collected. Let's build something together!");
+          }
+        });
+
+        // traffic cones: knock them flying, they pop back later
+        document.querySelectorAll<HTMLElement>("[data-cone]:not(.hit)").forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.right > cr.left && r.left < cr.right && r.bottom > cr.top && r.top < cr.bottom) {
+            el.classList.add("hit");
+            const dirX = r.left + r.width / 2 < cr.left + cr.width / 2 ? -1 : 1;
+            gsap.timeline({ onComplete: () => el.classList.remove("hit") })
+              .to(el, { x: dirX * (60 + Math.random() * 60), y: -40 - Math.random() * 40, rotate: dirX * (200 + Math.random() * 200), duration: 0.6, ease: "power2.out" })
+              .to(el, { y: 10, duration: 0.35, ease: "bounce.out" })
+              .to(el, { opacity: 0, duration: 0.3, delay: 1.6 })
+              .set(el, { x: 0, y: 0, rotate: 0, scale: 0 })
+              .to(el, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(3)" });
           }
         });
 

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, Map as MapIcon, X } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { profile } from "@/lib/profile";
@@ -84,6 +84,22 @@ function MapSvg({ big, onPick, pos }: { big?: boolean; onPick?: (id: string) => 
       <path d={ROUTE} fill="none" stroke="#1d1b2e" strokeWidth={big ? 64 : 90} strokeLinecap="round" />
       <path d={ROUTE} fill="none" stroke="#34324a" strokeWidth={big ? 54 : 70} strokeLinecap="round" className={big ? "map-road" : ""} />
       <path d={ROUTE} fill="none" stroke="#ffc93c" strokeWidth={big ? 5 : 10} strokeDasharray={big ? "22 22" : "40 40"} className="map-lane" />
+      {big &&
+        PTS.slice(0, -1).flatMap((_, i) =>
+          [0.3, 0.7].map((f, j) => {
+            const b = bez(i, f);
+            const side = (i + j) % 2 ? 1 : -1;
+            const rad = ((b.a + 90) * Math.PI) / 180;
+            const x = b.x + Math.cos(rad) * 48 * side, y = b.y + Math.sin(rad) * 48 * side;
+            return (
+              <g key={`${i}-${j}`} transform={`translate(${x - 13} ${y - 26})`}><g className="map-cone">
+                <rect x="1" y="24" width="24" height="5" rx="2" fill="#ff6b1a" stroke="#1d1b2e" strokeWidth="2.5" />
+                <path d="M9 3 L17 3 L22 24 L4 24 Z" fill="#ff7a1a" stroke="#1d1b2e" strokeWidth="2.5" strokeLinejoin="round" />
+                <path d="M7.4 10 L18.6 10 L19.8 15 L6.2 15 Z" fill="#fff" />
+              </g></g>
+            );
+          })
+        )}
       {stops.map((s, i) => {
         const p = PTS[i];
         const done = i <= pos.cur;
@@ -127,6 +143,7 @@ export default function Minimap() {
         .fromTo(".map-panel", { clipPath: "circle(0% at calc(100% - 70px) 60px)" }, { clipPath: "circle(150% at calc(100% - 70px) 60px)", duration: 0.9, ease: "power3.inOut" })
         .fromTo(".map-terrain", { scale: 0, transformOrigin: "center", transformBox: "fill-box" }, { scale: 1, duration: 0.7, ease: "back.out(1.6)", stagger: 0.06 }, "-=0.45")
         .fromTo(".map-road", { strokeDasharray: 6000, strokeDashoffset: 6000 }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, "-=0.7")
+        .fromTo(".map-cone", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: "bounce.out" }, "-=0.6")
         .fromTo(".map-pin", { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(2.4)", stagger: 0.06 }, "-=0.8")
         .fromTo(".map-side > *", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.06 }, "-=0.6");
     },
@@ -153,17 +170,16 @@ export default function Minimap() {
 
   return (
     <div ref={root}>
-      {/* Mini map widget = the navbar */}
-      <button ref={btn} onClick={() => setOpen(true)} aria-label="Open map" className="minimap fixed right-3 top-3 z-[55] flex items-center gap-3 rounded-2xl border-2 border-ink bg-white p-2 pr-3 shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5 sm:right-5 sm:top-5">
-        <span className="block h-[84px] w-[60px] overflow-hidden rounded-xl border-2 border-ink bg-[#fff6d6] sm:h-[104px] sm:w-[74px]">
-          <MapSvg pos={pos} />
+      {/* Nav icon — opens the map */}
+      <button ref={btn} onClick={() => setOpen(true)} aria-label="Open map" className="group fixed right-3 top-3 z-[55] flex items-center gap-2 sm:right-5 sm:top-5">
+        <span className="pointer-events-none hidden translate-x-2 items-center gap-1.5 rounded-full border-2 border-ink bg-white px-3 py-1.5 text-xs font-semibold opacity-0 shadow-[3px_3px_0_var(--ink)] transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 sm:flex">
+          <span className="size-2 rounded-full" style={{ background: cur.color }} /> {cur.label} <span className="mono text-ink/40">· M</span>
         </span>
-        <span className="hidden flex-col items-start text-left sm:flex">
-          <span className="mono text-[10px] font-bold text-ink/50">MAP · M</span>
-          <span className="flex items-center gap-1.5 text-sm font-semibold">
-            <span className="size-2 rounded-full" style={{ background: cur.color }} /> {cur.label}
+        <span className="relative grid size-12 place-items-center rounded-2xl border-2 border-ink bg-[#ffc93c] shadow-[3px_3px_0_var(--ink)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:rotate-[-6deg]">
+          <MapIcon className="size-6" />
+          <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full border-2 border-ink text-[9px] font-bold text-white" style={{ background: cur.color }}>
+            {pos.cur}
           </span>
-          <span className="mono mt-1 text-[10px] text-ink/50">CP {String(pos.cur).padStart(2, "0")} / {String(stops.length - 1).padStart(2, "0")}</span>
         </span>
       </button>
 
