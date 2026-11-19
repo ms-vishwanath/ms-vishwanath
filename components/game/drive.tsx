@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import Lenis from "lenis";
 import { coinSkills, TechIcon } from "@/lib/tech";
 import { profile } from "@/lib/profile";
 
@@ -82,16 +83,30 @@ export function Drive() {
     window.addEventListener("keydown", kd);
     window.addEventListener("keyup", ku);
 
-    let vy = 0, vx = 0, angle = -90, lastY = window.scrollY, raf = 0, frame = 0;
-    let px = 60, py = window.innerHeight * 0.45, dir = 1;
+    // Smooth scrolling
+    const lenis = new Lenis({ lerp: 0.085, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 1.4 });
+    (window as unknown as { __lenis: Lenis }).__lenis = lenis;
+
+    let vy = 0, vx = 0, ox = 0, oy = 0, angle = -90, raf = 0, frame = 0;
+    let px = -1, py = -1;
     const collected = new Set<string>();
     let curStop = "";
     const seen = new Set<string>();
 
-    const loop = () => {
+    // Scroll-driven path: a flowing figure that sweeps the full screen —
+    // starts top-left, glides right and down, then curves back, again and again.
+    const path = (t: number, W: number, H: number) => {
+      const mx = 46, top = 96, bottom = H - 110;
+      const cx = W / 2, ax = W / 2 - mx;
+      const cy = (top + bottom) / 2, ay = (bottom - top) / 2;
+      return [cx - ax * Math.cos(t * 1.6), cy - ay * Math.cos(t * 1.05)] as const;
+    };
+
+    const loop = (time: number) => {
+      lenis.raf(time);
       const k = keys.current;
       const W = window.innerWidth, H = window.innerHeight;
-      const m = 30;
+      const t = lenis.scroll / H;
 
       vx += ((k.right ? 1 : 0) - (k.left ? 1 : 0)) * ACC;
       vy += ((k.down ? 1 : 0) - (k.up ? 1 : 0)) * ACC;
@@ -99,34 +114,33 @@ export function Drive() {
       vy *= FRICTION;
       vx = Math.max(-MAX, Math.min(MAX, vx));
       vy = Math.max(-MAX, Math.min(MAX, vy));
+      const steering = k.left || k.right || k.up || k.down;
 
-      // keyboard: free roam; pushing past top/bottom edge scrolls the page
-      px += vx;
-      let ny = py + vy;
-      const top = 90, bottom = H - 90;
-      if (ny > bottom) { window.scrollBy(0, ny - bottom); ny = bottom; }
-      if (ny < top) { window.scrollBy(0, ny - top); ny = top; }
-      py = ny;
+      const [bx, by] = path(t, W, H);
+      ox += vx;
+      oy += vy;
+      // without input, drift back onto the scroll path
+      if (!steering) { ox *= 0.985; oy *= 0.985; }
 
-      // wheel / touch scroll drives the car left <-> right
-      const dy = window.scrollY - lastY;
-      lastY = window.scrollY;
-      const keyScroll = Math.abs(vy) > 0.3 && (py === bottom || py === top);
-      let sx = 0;
-      if (!keyScroll && Math.abs(dy) > 0.2) {
-        sx = Math.abs(dy) * 1.3 * dir;
-        px += sx;
-      }
-      if (px > W - m) { px = W - m; dir = -1; vx = -Math.abs(vx) * 0.4; }
-      if (px < m) { px = m; dir = 1; vx = Math.abs(vx) * 0.4; }
+      let tx = bx + ox, ty = by + oy;
+      const minX = 24, maxX = W - 24, minY = 84, maxY = H - 70;
+      if (tx < minX) { ox += minX - tx; tx = minX; }
+      if (tx > maxX) { ox -= tx - maxX; tx = maxX; }
+      // driving into the bottom/top edge scrolls the page
+      if (ty > maxY) { if (k.down) lenis.scrollTo(lenis.targetScroll + Math.max(vy, 6), { immediate: false, lerp: 0.12 }); oy -= ty - maxY; ty = maxY; }
+      if (ty < minY) { if (k.up) lenis.scrollTo(lenis.targetScroll + Math.min(vy, -6), { immediate: false, lerp: 0.12 }); oy += minY - ty; ty = minY; }
 
-      const mx = vx + sx;
-      const my = Math.abs(vy) > 0.3 ? vy : dy * 0.35;
-      if (Math.hypot(mx, my) > 0.6) {
+      if (px < 0) { px = tx; py = ty; }
+      const nx = px + (tx - px) * 0.14;
+      const ny = py + (ty - py) * 0.14;
+      const mx = nx - px, my = ny - py;
+      px = nx; py = ny;
+
+      if (Math.hypot(mx, my) > 0.25) {
         const target = (Math.atan2(-mx, my) * 180) / Math.PI;
         let diff = target - angle;
         diff = ((diff + 540) % 360) - 180;
-        angle += diff * 0.2;
+        angle += diff * 0.16;
       }
 
       const car = carRef.current;
@@ -174,6 +188,7 @@ export function Drive() {
 
     return () => {
       cancelAnimationFrame(raf);
+      lenis.destroy();
       window.removeEventListener("keydown", kd);
       window.removeEventListener("keyup", ku);
     };

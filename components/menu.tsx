@@ -44,6 +44,8 @@ export default function Menu() {
 
   useEffect(() => {
     document.body.dataset.menu = open ? "open" : "";
+    const l = (window as unknown as { __lenis?: { stop: () => void; start: () => void } }).__lenis;
+    if (open) l?.stop(); else l?.start();
     if (open) tl.current?.timeScale(1).play();
     else tl.current?.timeScale(1.6).reverse();
     const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -53,7 +55,11 @@ export default function Menu() {
 
   const go = (id: string) => {
     setOpen(false);
-    gsap.to(window, { scrollTo: { y: `#${id}`, offsetY: 0 }, duration: 1.4, ease: "power3.inOut", delay: 0.35 });
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o: object) => void } }).__lenis;
+    setTimeout(() => {
+      if (lenis) lenis.scrollTo(`#${id}`, { duration: 1.6, easing: (x: number) => 1 - Math.pow(1 - x, 4) });
+      else gsap.to(window, { scrollTo: `#${id}`, duration: 1.4, ease: "power3.inOut" });
+    }, 350);
   };
 
   return (
