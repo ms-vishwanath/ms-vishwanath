@@ -3,37 +3,26 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { TechIcon } from "@/lib/tech";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Reveal({ children, delay = 0, className, y = 24 }: { children: ReactNode; delay?: number; className?: string; y?: number }) {
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, delay, ease }}
-    >
+    <motion.div className={className} initial={{ opacity: 0, y }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7, delay, ease }}>
       {children}
     </motion.div>
   );
 }
 
-// Word-by-word masked reveal for headlines.
 export function SplitText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
   return (
     <span ref={ref} className={cn("inline", className)} aria-label={text}>
       {text.split(" ").map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.08em]" aria-hidden>
-          <motion.span
-            className="inline-block"
-            initial={{ y: "110%" }}
-            animate={inView ? { y: 0 } : {}}
-            transition={{ duration: 0.9, delay: delay + i * 0.06, ease }}
-          >
+        <span key={i} className="inline-block overflow-hidden pb-[0.1em] align-bottom" aria-hidden>
+          <motion.span className="inline-block" initial={{ y: "110%", rotate: 6 }} animate={inView ? { y: 0, rotate: 0 } : {}} transition={{ duration: 0.8, delay: delay + i * 0.05, ease }}>
             {w}&nbsp;
           </motion.span>
         </span>
@@ -42,35 +31,63 @@ export function SplitText({ text, className, delay = 0 }: { text: string; classN
   );
 }
 
-export function Section({ id, index, label, title, lead, children, className }: { id: string; index: string; label: string; title: string; lead?: string; children: ReactNode; className?: string }) {
+/** A stop on the drive: tinted full-bleed band, checkpoint gate across the road, illustration. */
+export function Section({
+  id, index, label, title, lead, art, tint, accent, children, className,
+}: { id: string; index: string; label: string; title: string; lead?: string; art?: ReactNode; tint: string; accent: string; children: ReactNode; className?: string }) {
   return (
-    <section id={id} className={cn("relative border-t border-line py-28 sm:py-36", className)}>
-      <div className="wrap">
-        <div className="mb-16 grid gap-8 md:grid-cols-12">
-          <div className="md:col-span-3">
-            <Reveal>
-              <p className="mono text-xs text-dim">
-                <span className="text-fg">{index}</span> / {label}
-              </p>
-            </Reveal>
-          </div>
-          <div className="md:col-span-9">
-            <h2 className="text-4xl font-medium tracking-tighter sm:text-6xl text-balance">
-              <SplitText text={title} />
-            </h2>
-            {lead && (
-              <Reveal delay={0.15}>
-                <p className="mt-6 max-w-2xl text-lg text-dim text-pretty">{lead}</p>
+    <section id={id} data-stop={label} style={{ background: tint, ["--accent" as string]: accent }} className={cn("relative py-24 sm:py-32", className)}>
+      <Gate index={index} label={label} accent={accent} />
+      <div className="road-pad">
+        <div className="wrap">
+          <div className="mb-14 grid items-center gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Reveal>
+                <p className="mono inline-flex items-center gap-2 rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-semibold shadow-[3px_3px_0_var(--ink)]">
+                  <span className="size-2 rounded-full" style={{ background: accent }} /> CP {index} · {label}
+                </p>
+              </Reveal>
+              <h2 className="mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
+                <SplitText text={title} />
+              </h2>
+              {lead && (
+                <Reveal delay={0.15}>
+                  <p className="mt-5 max-w-xl text-lg text-ink/70 text-pretty">{lead}</p>
+                </Reveal>
+              )}
+            </div>
+            {art && (
+              <Reveal delay={0.1} className="mx-auto w-full max-w-md lg:col-span-5">
+                {art}
               </Reveal>
             )}
           </div>
+          {children}
         </div>
-        {children}
       </div>
     </section>
   );
 }
 
-export function Tag({ children }: { children: ReactNode }) {
-  return <span className="mono rounded-full border border-line px-2.5 py-1 text-[11px] text-dim">{children}</span>;
+export function Gate({ index, label, accent }: { index: string; label: string; accent: string }) {
+  return (
+    <div className="gate pointer-events-none absolute top-0 z-10" aria-hidden>
+      <div className="gate-bar" style={{ background: accent }}>
+        <span className="mono">CP{index}</span>
+        <span className="mono gate-label">{label}</span>
+      </div>
+    </div>
+  );
+}
+
+export function Tag({ children }: { children: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-white px-2.5 py-1 text-xs font-medium">
+      <TechIcon name={children} className="size-3.5" /> {children}
+    </span>
+  );
+}
+
+export function Card({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={cn("rounded-2xl border-2 border-ink bg-white shadow-[5px_5px_0_var(--ink)]", className)}>{children}</div>;
 }

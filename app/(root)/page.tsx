@@ -1,5 +1,6 @@
-import Nav from "@/components/nav";
-import Hero from "@/components/sections/hero";
+import Menu from "@/components/menu";
+import { Drive, Road } from "@/components/game/drive";
+import Start from "@/components/sections/start";
 import About from "@/components/sections/about";
 import Expertise from "@/components/sections/expertise";
 import Work from "@/components/sections/work";
@@ -9,9 +10,11 @@ import { AI, Contact, Leadership, Venture } from "@/components/sections/rest";
 export default function Page() {
   return (
     <>
-      <Nav />
-      <main>
-        <Hero />
+      <Menu />
+      <Drive />
+      <main className="relative">
+        <Road />
+        <Start />
         <About />
         <Expertise />
         <Work />

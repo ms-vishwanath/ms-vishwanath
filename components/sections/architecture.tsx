@@ -1,5 +1,7 @@
 "use client";
 
+import { CityArt } from "@/components/illustrations";
+
 import { useState } from "react";
 import { Reveal, Section } from "@/components/ui";
 
@@ -59,7 +61,7 @@ export default function Architecture() {
   const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
 
   return (
-    <Section id="architecture" index="04" label="Architecture" title="I think in systems, not screens." lead="A simplified view of the kind of platform I work on: around 50 microservices behind Backend-for-Frontend layers, connected by gRPC and RabbitMQ events. Hover a layer.">
+    <Section id="architecture" index="04" label="Service city" tint="#efeaff" accent="#8b5cf6" art={<CityArt />} title="I think in systems, not screens." lead="A simplified view of the kind of platform I work on: around 50 microservices behind Backend-for-Frontend layers, connected by gRPC and RabbitMQ events. Hover a layer.">
       <div className="grid items-center gap-12 lg:grid-cols-12">
         <Reveal className="lg:col-span-8">
           <svg viewBox="-280 -290 560 470" className="w-full">
@@ -115,10 +117,10 @@ export default function Architecture() {
             const i = layers.indexOf(L);
             return (
               <Reveal key={L.name} delay={(3 - i) * 0.06}>
-                <div onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} className={`cursor-default rounded-xl border p-5 transition-colors duration-300 ${hover === i ? "border-fg" : "border-line"}`}>
-                  <p className="mono text-xs text-dim">L{i}</p>
+                <div onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} className={`cursor-default rounded-xl border p-5 transition-colors duration-300 ${hover === i ? "border-ink bg-white shadow-[4px_4px_0_var(--ink)]" : "border-ink/30 bg-white/50"}`}>
+                  <p className="mono text-xs text-ink/65">L{i}</p>
                   <h4 className="mt-1 text-lg font-medium">{L.name}</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-dim">{L.desc}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/65">{L.desc}</p>
                 </div>
               </Reveal>
             );

@@ -2,9 +2,9 @@
 
 Personal portfolio of **M. S. Vishwanath**, Full Stack AI Developer: https://ms-vishwanath.web.app
 
-- **Stack:** Next.js 16 (static export) · React 19 · Tailwind CSS v4 · Framer Motion · React Three Fiber
+- **Stack:** Next.js 16 (static export) · React 19 · Tailwind CSS v4 · GSAP · Framer Motion
 - **Content:** everything lives in [`lib/profile.ts`](lib/profile.ts). Edit it there and every section updates.
-- **Sections:** Hero (isometric 3D scene) · About · Expertise · Work · Architecture · AI · Leadership · Ventures · Contact
+- **Game:** drive the car with WASD / arrow keys (or scroll — it sweeps left↔right) and collect stack icons. Engine: `components/game/drive.tsx`.
 
 ```bash
 npm install
