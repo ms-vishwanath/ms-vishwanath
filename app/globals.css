@@ -139,3 +139,6 @@ html.lenis, html.lenis body { height: auto; }
 @keyframes mapping { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.6); opacity: 0; } }
 .map-pin { transition: filter .2s; } .map-pin:hover { filter: drop-shadow(0 6px 0 rgba(29,27,46,.35)); }
 .cone { position: absolute; transform-origin: 50% 90%; filter: drop-shadow(2px 3px 0 rgba(29,27,46,.25)); }
+.pg { display: inline-grid; place-items: center; min-width: 42px; height: 42px; padding: 0 10px; border-radius: 12px; background: #fff;
+  border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); font-weight: 700; font-size: 14px; transition: transform .15s, background .2s; }
+.pg:hover { background: #ffc93c; transform: translateY(-2px); }
