@@ -1,31 +1,34 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import localFont from 'next/font/local'
-import { GoogleAnalytics } from "@next/third-parties/google";
 
-const primaryFont = localFont({
-  src: "./fonts/dm_sans/DM_SANS.ttf"
-})
+const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: "M. S. Vishwanath | Software Developer & Full Stack Engineer",
+  metadataBase: new URL("https://ms-vishwanath.web.app"),
+  title: "M. S. Vishwanath — Full Stack AI Developer",
   description:
-    "Portfolio of M. S. Vishwanath - Full Stack Developer with experience in scalable web applications, microservices architecture, AI-powered tools, and distributed systems.",
+    "Full Stack AI Developer, software architect, freelancer and trainer. I design and build intelligent, scalable, production-ready products.",
+  openGraph: {
+    title: "M. S. Vishwanath — Full Stack AI Developer",
+    description: "Full-stack engineering, AI, distributed systems and product building.",
+    url: "https://ms-vishwanath.web.app",
+    type: "website",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#050505" },
+  ],
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="light" style={{ colorScheme: "light" }}>
-      <body
-        className={`bg-white text-slate-900 antialiased ${primaryFont.className}`}
-      >
-        {children}
-              <GoogleAnalytics gaId="G-XYZ" />
-      </body>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

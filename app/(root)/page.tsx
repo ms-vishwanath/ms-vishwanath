@@ -1,20 +1,26 @@
-import React from "react";
-import HeroSection from "@/components/sections/hero-section";
-import AboutSection from "@/components/sections/about-section";
-import ExperienceSection from "@/components/sections/experience-section";
-import TechStack from "@/components/sections/tech-stack";
-import ProjectsSection from "@/components/sections/projects-section";
-import FooterSection from "@/components/sections/footer-section";
+import Nav from "@/components/nav";
+import Hero from "@/components/sections/hero";
+import About from "@/components/sections/about";
+import Expertise from "@/components/sections/expertise";
+import Work from "@/components/sections/work";
+import Architecture from "@/components/sections/architecture";
+import { AI, Contact, Leadership, Venture } from "@/components/sections/rest";
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-violet-500/20 selection:text-violet-600">
-      <HeroSection />
-      <AboutSection />
-      <ExperienceSection />
-      <TechStack />
-      <ProjectsSection />
-      <FooterSection />
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Expertise />
+        <Work />
+        <Architecture />
+        <AI />
+        <Leadership />
+        <Venture />
+        <Contact />
+      </main>
+    </>
   );
 }
